@@ -1,0 +1,81 @@
+section{
+    min-height: 100vh;
+    background-color: red;
+    margin-bottom: 20px;
+}
+/* без js */
+html{
+    scroll-behavior: smooth;
+}
+
+.go-top-btn{
+    display: block;
+    position: fixed;
+	bottom: 10px;
+	left: 10px;
+	width: 50px;
+	height: 50px;
+    border-radius: 50%;
+	box-shadow: 0 0 5px 4px rgba(23, 161, 83, 0.2);
+}
+/* //кнопка наверх 1 jquery */
+.go-top-btn-1{
+    display: none;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	width: 50px;
+	height: 50px;
+    background-color: green;
+	border-radius: 50%;
+	box-shadow: 0 0 5px 4px rgba(23, 161, 83, 0.2);
+}
+.go-top-btn-1 img {
+    width: 10px;
+    height: 18px;
+    transform: rotate(90deg);
+    margin: auto;
+}
+
+/* //кнопка наверх 2 jquery */
+.go-top-btn-2{
+    position: fixed;
+	bottom: 10px;
+	right: 10px;
+	width: 50px;
+	height: 50px;
+    background-color: green;
+	border-radius: 50%;
+	box-shadow: 0 0 5px 4px rgba(23, 161, 83, 0.2);
+
+}
+/* //кнопка наверх 3 js */
+.go-top-btn-3 {
+	display: none;
+}
+.go-top-btn-3.fade-in {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	z-index: 9;
+	right: 20px;
+	bottom: 20px;
+	width: 40px;
+	height: 40px;
+	border: 1px solid green;
+	border-radius: 2px;
+	cursor: pointer;
+	
+}
+
+.go-top-btn-3.fade-in span {
+	margin-top: 4px;
+	display: block;
+	height: 12px;
+	width: 12px;
+	border-top: 1px solid green;
+	border-right: 1px solid green;
+	transform: skew(10deg, 10deg);
+	transform: rotate(-45deg) skew(10deg, 10deg);
+}
