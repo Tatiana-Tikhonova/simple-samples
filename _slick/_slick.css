@@ -1,0 +1,90 @@
+.my-slider {
+	width: 100%;
+	position: relative;
+	
+}
+/* Слайдер */
+.my-slider.slick-slider {
+} /* Слайдер запущен */
+.my-slider.slick-slider.slick-initialized {
+} /* Слайдер с точками */
+.my-slider.slick-slider.slick-dotted {
+}
+/* Ограничивающая оболочка - если показывать слайды на всю ширину экрана
+то можно overflow: visible; */
+.my-slider .slick-list {
+    overflow: hidden;
+    display: block;
+}
+/* Лента слайдов */
+.my-slider .slick-track {
+    display: flex;
+    min-width: 0;
+    align-items: flex-start;
+}
+/* Слайд */
+.my-slider__slide {
+    height: 300px;
+    background-color: red;
+}
+.my-slider .slick-slide {
+    margin: 0px 15px;
+}
+.my-slider .slick-slide > div {
+}
+/* Слайд активный (показывается) */
+.my-slider .slick-slide.slick-active {
+} /* Слайд основной */
+.my-slider .slick-slide.slick-current {
+} /* Слайд по центру */
+.my-slider .slick-slide.slick-center {
+} /* Клонированный слайд */
+.my-slider .slick-slide.slick-cloned {
+}
+/* Стрелка */
+.my-slider .slick-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+    z-index: 1;
+    font-size: 0;
+} /* Стрелка влево */
+.my-slider .slick-arrow.slick-prev {
+    left: 0;
+    background: url("../img/") top center / cover no-repeat;
+} /* Стрелка вправо */
+.my-slider .slick-arrow.slick-next {
+    right: 0;
+    background: url("../img/") top center / cover no-repeat;
+} /* Стрелка не активная */
+.my-slider .slick-arrow.slick-disabled {
+}
+/* Точки (булиты) */
+.my-slider .slick-dots {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.my-slider .slick-dots li {
+    margin: 0px 5px;
+}
+/* Элемент точки */
+.my-slider .slick-dots li button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    font-size: 0;
+}
+/* Активная точка */
+.my-slider .slick-dots li.slick-active {
+    
+}
+.my-slider .slick-dots li.slick-active button {
+    background-color: red;
+}
