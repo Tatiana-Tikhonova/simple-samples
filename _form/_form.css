@@ -1,0 +1,217 @@
+
+*{
+    box-sizing: border-box;
+}.form {
+width: 300px;
+}
+.form__input,
+.form__textarea{
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    outline: none;
+    border: 1px solid black;
+    font-family: Arial;
+    font-size: 16px;
+    color: black;
+}
+.form__input {
+
+}
+.form__textarea{
+    resize: none;
+    height: 200px;
+}
+.form__input:focus,
+.form__textarea:focus{
+    border: 1px solid blue;
+}
+.form__input::placeholder,
+.form__textarea::placeholder{color: grey;};
+.form__input:focus::placeholder,
+.form__textarea:focus::placeholder{color: red;};
+
+/* поле загрузки файла */
+.form__file{
+    /* глюк - стили не применяются, но удалять селектор нельзя, 
+    перестает работать  display: none; для инпута
+    */
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.form__file input[type="file"]{
+    display: none;
+}
+.form__filebutton,
+.form__filename{
+    display: inline-block;
+    padding: 10px;
+    font-family: Arial;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.form__filebutton{
+    background: black;
+    border: 1px solid black;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form__filename{
+    color: black;
+}
+/* лейблы с инпутами внутри */
+.form__label {
+display: flex;align-items: center;
+margin-bottom: 10px;
+cursor: pointer;
+}
+.form__checkbox{
+    display: none;
+}
+.form__label-check {
+    display: flex;justify-content:center;align-items: center;
+    width: 20px;height: 20px;
+    margin-right: 5px;
+    border: 1px solid black;
+}
+
+.form__checkbox:checked + .form__label .form__label-check{
+    background: black;
+
+}
+.form__label-check svg{
+    width: 13px;height: 11px;
+}
+.form__label-check path{
+fill:transparent;
+}
+.form__checkbox:checked  + .form__label .form__label-check path{
+    fill:white;
+}
+.form__radio{
+    display: none;
+}
+.form__label-radio{
+    display: flex;justify-content:center;align-items: center;
+    width: 20px;height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+    border: 1px solid black;
+}
+.form__radio:checked  + .form__label-radio svg{
+    width: 14px;height: 14px;
+}
+.form__radio:checked  + .form__label-radio circle{
+fill:black;
+}
+.form__label-text {
+    font-family: Arial;
+    font-size: 16px;
+    color: black;
+}
+
+.agreement {
+    display: block;
+    margin: 10px 0px;
+}
+.agreement__input {
+   
+}
+
+.agreement__check {
+    float: left;
+}
+
+.agreement__text {
+}
+.clearfloat{
+display: block;
+clear:both;
+}
+/* colorpicker */
+.form__colorpicker{
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+    outline: none;
+    border: 1px solid black;
+}
+/* ползунок */
+.form__range{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* кнопки */
+.form__btns{
+    display: flex;flex-wrap: wrap;justify-content: space-between;align-items: center;
+}
+.form__btn {
+   width: 49%;
+   padding: 10px;
+   border: 1px solid black;
+   font-family: Arial;
+   font-size: 16px;
+   cursor: pointer;
+   transition: 0.3s;
+}
+.form__btn_submit {
+background: black;
+color: white;
+}
+
+.button {
+}
+.form__btn_reset {
+    background: transparent;
+color: black;
+}
+.form__fieldset{
+    margin-bottom: 10px;
+border: 1px solid black;
+}
+.form__legend{
+    font-family: Arial;
+    font-size: 16px;
+    color: black;
+}
+/* селекты */
+.form__select{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: blue;
+    border: 1px solid black;
+    color: black;
+    border-radius: 0;
+}
+.form__optgroup{
+
+}
+.form__option{
+    
+}
+.error-message{
+    font-family: Arial;
+    font-size: 16px;
+    color: red;
+}
+
+@media (min-width:992px){
+    .form__filebutton:hover{
+        background: transparent;
+        color: black;
+    }
+    .form__btn_submit:hover{
+        background: transparent;
+        color: black;
+    }
+    .form__btn_reset:hover{
+        background: black;
+        color: white;
+    }
+}
