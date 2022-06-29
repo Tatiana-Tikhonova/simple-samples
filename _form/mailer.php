@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $GLOBALS['status'][] = $str;
         };
 
-        // Настройки впочты
+        // Настройки почты
         $mail->Host       = 'ssl://smtp.yandex.ru'; // SMTP сервера
         $mail->Username   = 'tantikh2020@yandex.ru'; // Логин
         $mail->Password   = 'pgabtbnprgfnznuv'; // Пароль
