@@ -102,10 +102,10 @@ fill:transparent;
     margin-right: 5px;
     border: 1px solid black;
 }
-.form__radio:checked  + .form__label-radio svg{
+.form__radio:checked  + .form__label .form__label-radio svg{
     width: 14px;height: 14px;
 }
-.form__radio:checked  + .form__label-radio circle{
+.form__radio:checked  + .form__label .form__label-radio circle{
 fill:black;
 }
 .form__label-text {

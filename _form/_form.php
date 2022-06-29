@@ -24,7 +24,7 @@
         <!-- отправка файлов (multiple значит несколько) -->
         <div class="form__file">
             <label for="files">
-                <input id="files" form="send-file-form" type="file" name="files[]" multiple accept="image/jpg,image/jpeg,image/png,image/svg">
+                <input id="files" form="send-file-form" type="file" name="files" multiple accept="image/jpg,image/jpeg,image/png,image/svg">
                 <span class="form__filebutton">Загрузить файл</span>
                 <span class="form__filename">Файл не выбран</span>
             </label>
@@ -33,8 +33,8 @@
             <legend>Выберите вариант</legend>
             <!-- если радиокнопок или чекбоксов несколько (группа) то нельзя давать им атрибут aria-required="true"
             это сделает одну из них или каждую из них обязательной -->
-            <label class="form__label">
-                <input class="form__radio" type="radio" name="radio" value="radio-1" checked>
+            <input id="radio-1" class="form__radio" type="radio" name="radio" value="radio-1" checked>
+            <label for="radio-1" class="form__label">
                 <span class="form__label-radio">
                     <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="5" cy="5" r="5" />
@@ -42,8 +42,8 @@
                 </span>
                 <span class="form__label-text">radio-1</span>
             </label>
-            <label class="form__label">
-                <input class="form__radio" type="radio" name="radio" value="radio-2">
+            <input id="radio-2" class="form__radio" type="radio" name="radio" value="radio-2">
+            <label for="radio-2" class="form__label">
                 <span class="form__label-radio">
                     <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="5" cy="5" r="5" />
@@ -54,8 +54,8 @@
         </fieldset>
         <fieldset>
             <legend>Выберите варианты</legend>
-            <label class="form__label">
-                <input class="form__checkbox" type="checkbox" name="check" value="check-1" checked>
+            <input id="check-1" class="form__checkbox" type="checkbox" name="check" value="check-1" checked>
+            <label for="check-1" class="form__label">
                 <span class="form__label-check">
                     <svg viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6.97016 0.969986C7.11103 0.835875 7.29848 0.761733 7.49298 0.763205C7.68747 0.764677 7.87378 0.841647 8.0126 0.977874C8.15143 1.1141 8.2319 1.29893 8.23704 1.49336C8.24218 1.68779 8.17159 1.87661 8.04016 2.01999L4.05016 7.00999C3.98155 7.08389 3.89874 7.14319 3.80669 7.18435C3.71464 7.22552 3.61523 7.2477 3.51441 7.24956C3.41359 7.25143 3.31343 7.23295 3.21991 7.19522C3.1264 7.15749 3.04146 7.10129 2.97016 7.02999L0.324158 4.38399C0.250471 4.31532 0.191369 4.23252 0.150377 4.14052C0.109385 4.04853 0.0873427 3.94921 0.0855659 3.84851C0.0837892 3.74781 0.102314 3.64778 0.140035 3.55439C0.177756 3.461 0.233901 3.37617 0.305119 3.30495C0.376338 3.23373 0.461172 3.17758 0.55456 3.13986C0.647948 3.10214 0.747978 3.08362 0.84868 3.08539C0.949383 3.08717 1.0487 3.10921 1.1407 3.15021C1.2327 3.1912 1.3155 3.2503 1.38416 3.32399L3.47816 5.41699L6.95116 0.991987C6.95741 0.984288 6.96409 0.976943 6.97116 0.969986H6.97016Z" />
@@ -63,8 +63,8 @@
                 </span>
                 <span class="form__label-text">check-1</span>
             </label>
-            <label class="form__label">
-                <input class="form__checkbox" type="checkbox" name="check" value="check-2">
+            <input id="check-1" class="form__checkbox" type="checkbox" name="check" value="check-2">
+            <label for="check-2" class="form__label">
                 <span class="form__label-check">
                     <svg viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6.97016 0.969986C7.11103 0.835875 7.29848 0.761733 7.49298 0.763205C7.68747 0.764677 7.87378 0.841647 8.0126 0.977874C8.15143 1.1141 8.2319 1.29893 8.23704 1.49336C8.24218 1.68779 8.17159 1.87661 8.04016 2.01999L4.05016 7.00999C3.98155 7.08389 3.89874 7.14319 3.80669 7.18435C3.71464 7.22552 3.61523 7.2477 3.51441 7.24956C3.41359 7.25143 3.31343 7.23295 3.21991 7.19522C3.1264 7.15749 3.04146 7.10129 2.97016 7.02999L0.324158 4.38399C0.250471 4.31532 0.191369 4.23252 0.150377 4.14052C0.109385 4.04853 0.0873427 3.94921 0.0855659 3.84851C0.0837892 3.74781 0.102314 3.64778 0.140035 3.55439C0.177756 3.461 0.233901 3.37617 0.305119 3.30495C0.376338 3.23373 0.461172 3.17758 0.55456 3.13986C0.647948 3.10214 0.747978 3.08362 0.84868 3.08539C0.949383 3.08717 1.0487 3.10921 1.1407 3.15021C1.2327 3.1912 1.3155 3.2503 1.38416 3.32399L3.47816 5.41699L6.95116 0.991987C6.95741 0.984288 6.96409 0.976943 6.97116 0.969986H6.97016Z" />

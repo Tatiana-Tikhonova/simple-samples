@@ -18,7 +18,6 @@ window.addEventListener('DOMContentLoaded', function () {
     // =====================================================
     // отображение имени файла при загрузке
     (function bindFiles() {
-
         let fileInputs = document.querySelectorAll('input[type=file]'),
             dots;
         fileInputs.forEach(function (inp) {
@@ -132,7 +131,6 @@ window.addEventListener('DOMContentLoaded', function () {
         } else {
             errMessage.textContent = msg;
             field.closest('form').insertBefore(errMessage, field);
-
         }
     }
     function removeErrors(field) {

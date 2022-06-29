@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Получатель письма
         $mail->addAddress('tantikh2020@gmail.com');
 
-        // Прикрипление файлов к письму
+        // Прикрепление файлов к письму
         if (!empty($files['name'][0])) {
             for ($ct = 0; $ct < count($files['tmp_name']); $ct++) {
                 $uploadfile = tempnam(sys_get_temp_dir(), sha1($files['name'][$ct]));

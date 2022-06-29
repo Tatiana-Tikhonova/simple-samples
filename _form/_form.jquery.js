@@ -32,7 +32,6 @@ $(document).ready(function () {
     // =====================================================
     // прикрепление файлов
     let uploadFiles; // переменная. будет содержать данные файлов
-    // один файл
     $('input[type=file]').on('change', function () {
         uploadFiles = this.files;
         let dots,
@@ -42,19 +41,6 @@ $(document).ready(function () {
         $(this).parents('.form__file').find('.form__filename').text(showName);
 
     });
-    // несколько файлов
-    // заполняем переменную данными, при изменении значения поля file
-    // $('input[type=file]').on('change', function () {
-    //     uploadFiles = this.files;
-    //     let dots,
-    //         fileName = uploadFiles[0].name.split('.');
-    //     fileName[0].length > 8 ? dots = '...' : dots = '.';
-    //     let showName = fileName[0].substring(0, 8) + dots + fileName[1];
-    //     $(this).parents('.form__file').find('.form__filename').text(showName);
-
-    // });
-
-
     // =====================================================
     // валидация и отправка ajax
     $('.form').on('submit', function (e) {
@@ -103,9 +89,7 @@ $(document).ready(function () {
                     fd.append(key, value);
                 });
             }
-
             return $.ajax({
-
                 url: '/mailer.php',
                 data: fd,
                 dataType: 'json',
