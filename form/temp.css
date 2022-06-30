@@ -1,0 +1,99 @@
+.custom-select {
+    height: 40px;
+}
+.custom-select__input-open, 
+.custom-select__input-close {
+    position:absolute;
+    width: 100%;
+    padding: 10px;
+    outline: transparent;
+    background-color: #fff;
+    border: 1px solid black;
+}
+.custom-select__input-open{
+z-index: 2;
+}
+.custom-select__input-close{
+z-index: 1;
+}
+.custom-select__input-open:focus-within{
+    z-index: 1;
+}
+.custom-select__input-open:focus-within + .custom-select__input-close{
+z-index: 2;
+}
+.custom-select__label-open {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+.custom-select__label-open-arr{
+
+}
+.custom-select__label-open-arr path{
+    fill: black;
+}
+
+.custom-select__text{
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    color: black;
+    pointer-events: none;
+}
+.custom-select__input:checked ~ .custom-select__text{
+    color: transparent;
+}
+.custom-select__label-open-bg{
+position:fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+z-index: 1;
+display: none;
+}
+.custom-select__input-open:focus-within + .custom-select__label-open .custom-select__label-open-bg{
+    display: block;
+}
+.custom-select__options {
+    position: absolute; 
+    z-index: 4;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid black;
+    pointer-events: none;
+}
+.custom-select__input-open:focus-within ~ .custom-select__options{
+height: auto;
+padding-top: 40px;
+}
+.custom-select__input{
+display: none;
+}
+
+.custom-select__label{
+display: none;
+/* min-height: 2em; */
+padding: 10px;
+}
+.custom-select__input-open:focus-within ~ .custom-select__options .custom-select__label{
+    display: block;
+pointer-events: auto;
+}
+.custom-select__label:hover{
+    background: grey;
+}
+.custom-select__input:checked + .custom-select__label{
+display: block;
+}
+
+
+.custom-select__label-close {
+}

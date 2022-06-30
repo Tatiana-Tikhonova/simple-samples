@@ -77,7 +77,7 @@ window.addEventListener('DOMContentLoaded', function () {
             phoneField = form.querySelector('input[name=phone]'),
             emailField = form.querySelector('input[name=email]'),
             agreement = form.querySelector('input[name=agreement]');
-        if ('' == nameField.value) {
+        if (nameField.getAttribute('aria-required') && '' == nameField.value) {
             addErrorMsg(nameField, 'Пожалуйста, заполните это поле!');
         }
         else if ('' != nameField.value && nameField.value.length < 2) {
@@ -86,7 +86,7 @@ window.addEventListener('DOMContentLoaded', function () {
         else {
             removeErrors(nameField);
         }
-        if ('' == phoneField.value) {
+        if (phoneField.getAttribute('aria-required') && '' == phoneField.value) {
             addErrorMsg(phoneField, 'Пожалуйста, заполните это поле!');
         }
         else if ('' != phoneField.value && phoneField.value.length < 11) {
@@ -95,7 +95,7 @@ window.addEventListener('DOMContentLoaded', function () {
         else {
             removeErrors(phoneField);
         }
-        if ('' == emailField.value) {
+        if (emailField.getAttribute('aria-required') && '' == emailField.value) {
             addErrorMsg(emailField, 'Пожалуйста, заполните это поле!');
         }
         else if ('' != emailField.value && !emailField.value.match(/@/)) {
