@@ -100,12 +100,12 @@
             <option value="100">
         </datalist>
         <!-- множественный выбор -->
-        <select class="form__select form__select_multiple" size="3" multiple name="hero[]">
-            <option class="form__option" disabled>Выберите героя</option>
-            <option class="form__option" value="Чебурашка">Чебурашка</option>
-            <option class="form__option" value="Крокодил Гена">Крокодил Гена</option>
-            <option class="form__option" value="Шапокляк">Шапокляк</option>
-            <option class="form__option" value="Крыса Лариса">Крыса Лариса</option>
+        <select class="form__select select-multiple" size="3" multiple name="hero[]">
+            <option class="select-multiple__option" disabled>Выберите героя</option>
+            <option class="select-multiple__option" value="Чебурашка">Чебурашка</option>
+            <option class="select-multiple__option" value="Крокодил Гена">Крокодил Гена</option>
+            <option class="select-multiple__option" value="Шапокляк">Шапокляк</option>
+            <option class="select-multiple__option" value="Крыса Лариса">Крыса Лариса</option>
         </select>
         <!-- сгруппированный -->
         <select class="form__select form__select_multiple" name="color" multiple>
@@ -121,29 +121,48 @@
             </optgroup>
         </select>
         <!-- кастомные псевдоселекты -->
-        <!-- без js -->
-        <div class="form__custom-select custom-select">
-            <input class="custom-select__input-open" type="text" name="open" id="open" readonly value="1">
-            <input class="custom-select__input-close" type="text" name="close" id="close" readonly value="12">
-            <div class="custom-select__options">
-                <input class="custom-select__input" type="radio" name="week" id="week[0]" value="День не выбран">
-                <label class="custom-select__label" for="week[0]">День не выбран</label>
-                <input class="custom-select__input" type="radio" name="week" id="week[1]" value="Понедельник">
-                <label class="custom-select__label" for="week[1]">Понедельник</label>
-                <input class="custom-select__input" type="radio" name="week" id="week[2]" value="Вторник">
-                <label class="custom-select__label" for="week[2]">Вторник</label>
-                <input class="custom-select__input" type="radio" name="week" id="week[3]" value="Среда">
-                <label class="custom-select__label" for="week[3]">Среда</label>
-                <input class="custom-select__input" type="radio" name="week" id="week[4]" value="Четверг">
-                <label class="custom-select__label" for="week[4]">Четверг</label>
-                <input class="custom-select__input" type="radio" name="week" id="week[5]" value="Пятница">
-                <label class="custom-select__label" for="week[5]">Пятница</label>
-                <input class="custom-select__input" type="radio" name="week" id="week[6]" value="Суббота">
-                <label class="custom-select__label" for="week[6]">Суббота</label>
-                <input class="custom-select__input" type="radio" name="week" id="week[7]" value="Воскресенье">
-                <label class="custom-select__label" for="week[7]">Воскресенье</label>
+        <!-- с js -->
+        <div class="form__custom-select js-select" data-select="custom">
+            <button class="js-select__trigger" data-select="trigger">Выберите день 1</button>
+            <div class="js-select__options" data-select="options">
+                <input class="js-select__input" type="radio" name="week" id="day[0]" value="День не выбран">
+                <label class="js-select__label" for="day[0]">День не выбран</label>
+                <input class="js-select__input" type="radio" name="week" id="day[1]" value="Понедельник">
+                <label class="js-select__label" for="day[1]">Понедельник</label>
+                <input class="js-select__input" type="radio" name="week" id="day[2]" value="Вторник">
+                <label class="js-select__label" for="day[2]">Вторник</label>
+                <input class="js-select__input" type="radio" name="week" id="day[3]" value="Среда">
+                <label class="js-select__label" for="day[3]">Среда</label>
+                <input class="js-select__input" type="radio" name="week" id="day[4]" value="Четверг">
+                <label class="js-select__label" for="day[4]">Четверг</label>
+                <input class="js-select__input" type="radio" name="week" id="day[5]" value="Пятница">
+                <label class="js-select__label" for="day[5]">Пятница</label>
+                <input class="js-select__input" type="radio" name="week" id="day[6]" value="Суббота">
+                <label class="js-select__label" for="day[6]">Суббота</label>
+                <input class="js-select__input" type="radio" name="week" id="day[7]" value="Воскресенье">
+                <label class="js-select__label" for="day[7]">Воскресенье</label>
             </div>
-
+        </div>
+        <div class="form__custom-select js-select" data-select="custom">
+            <button class="js-select__trigger" data-select="trigger">Выберите день 2</button>
+            <div class="js-select__options" data-select="options">
+                <input class="js-select__input" type="radio" name="week" id="week[0]" value="День не выбран">
+                <label class="js-select__label" for="week[0]">День не выбран</label>
+                <input class="js-select__input" type="radio" name="week" id="week[1]" value="Понедельник">
+                <label class="js-select__label" for="week[1]">Понедельник</label>
+                <input class="js-select__input" type="radio" name="week" id="week[2]" value="Вторник">
+                <label class="js-select__label" for="week[2]">Вторник</label>
+                <input class="js-select__input" type="radio" name="week" id="week[3]" value="Среда">
+                <label class="js-select__label" for="week[3]">Среда</label>
+                <input class="js-select__input" type="radio" name="week" id="week[4]" value="Четверг">
+                <label class="js-select__label" for="week[4]">Четверг</label>
+                <input class="js-select__input" type="radio" name="week" id="week[5]" value="Пятница">
+                <label class="js-select__label" for="week[5]">Пятница</label>
+                <input class="js-select__input" type="radio" name="week" id="week[6]" value="Суббота">
+                <label class="js-select__label" for="week[6]">Суббота</label>
+                <input class="js-select__input" type="radio" name="week" id="week[7]" value="Воскресенье">
+                <label class="js-select__label" for="week[7]">Воскресенье</label>
+            </div>
         </div>
         <!-- радиокнопки -->
         <fieldset form="send-file-form">
@@ -170,6 +189,7 @@
                 <span class="form__label-text">radio-2</span>
             </label>
         </fieldset>
+
         <!-- чекбоксы -->
         <fieldset form="send-file-form">
             <legend>Выберите варианты</legend>
@@ -202,8 +222,8 @@
     <!-- end inputs -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <!-- <script src="_form.jquery.js"></script> -->
-    <script src="_form.js"></script>
+    <script src="_form.jquery.js"></script>
+    <!-- <script src="_form.js"></script> -->
 </body>
 
 </html>

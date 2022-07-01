@@ -13,8 +13,15 @@ $(document).ready(function () {
         });
     }());
     // =====================================================
+    // селект
+    (function customSelect() {
+        
+
+
+    }());
+    // =====================================================
     // контроль заполнения полей
-    $('input[name=phone]').on('input', function (e) {
+    $('inpust[name=phone]').on('input', function (e) {
         $(this).val(function (i, value) {
             return value.replace(/[a-zA-Zа-яёА-ЯЁ_=!@#%&\^\$\*\<\>]/, '');
         });
@@ -41,45 +48,87 @@ $(document).ready(function () {
         $(this).parents('.form__file').find('.form__filename').text(showName);
 
     });
+    // очистка имени файла при ресете формы
+    $('[type="reset"]').on('click', function (e) {
+        $(this).parents('form').find('.form__filename').text('Файл не выбран');
+    });
     // =====================================================
-    // валидация и отправка ajax
+    // валидация формы
+    function validateFields(form) {
+        let isValid = false, fm = form,
+            nameField = fm.find('input[name=name]'),
+            phoneField = fm.find('input[name=phone]'),
+            emailField = fm.find('input[name=email]'),
+            agreement = fm.find('input[name=agreement]');
+
+
+        if (nameField.attr('aria-required') && '' == nameField.val()) {
+            addErrorMsg(nameField, 'Пожалуйста, заполните это поле!');
+        }
+        else if ('' != nameField.val() && nameField.val().length < 2) {
+            addErrorMsg(nameField, 'Имя не менее 2-х букв!');
+        }
+        else {
+            removeErrors(nameField);
+        }
+        if (phoneField.attr('aria-required') && '' == phoneField.val()) {
+            addErrorMsg(phoneField, 'Пожалуйста, заполните это поле!');
+        }
+        else if ('' != phoneField.val() && phoneField.val().length < 11) {
+            addErrorMsg(phoneField, 'Введите не менее 11 цифр!');
+        }
+        else {
+            removeErrors(phoneField);
+        }
+        if (emailField.attr('aria-required') && '' == emailField.val()) {
+            addErrorMsg(emailField, 'Пожалуйста, заполните это поле!');
+        }
+        else if ('' != emailField.val() && !emailField.val().match(/@/)) {
+            addErrorMsg(emailField, 'Введите адрес электронной почты!');
+        }
+        else {
+            removeErrors(emailField);
+        }
+        if (!agreement.prop('checked')) {
+            addErrorMsg(agreement, 'Подтвердите согласие на обработку персональных данных!');
+        }
+        else {
+            removeErrors(agreement);
+        }
+        if (nameField.hasClass('validate') && phoneField.hasClass('validate') &&
+            emailField.hasClass('validate') && agreement.hasClass('validate')) {
+            isValid = true;
+        }
+        return isValid;
+    }
+
+    function addErrorMsg(field, msg) {
+        if (field.prev('.error-message').length > 0) {
+            $(field).prev('.error-message').text(msg);
+        } else {
+            $(field).before('<div class="error-message">' + msg + '</div>');
+            $(field).addClass('invalid');
+            $(field).removeClass('validate');
+            $(field).css('border-color', 'red');
+        }
+
+    }
+    function removeErrors(field) {
+        $(field).removeClass('invalid');
+        $(field).addClass('validate');
+        $(field).css('border-color', '');
+        if (field.prev('.error-message').length > 0) {
+            field.prev('.error-message').remove();
+        }
+    }
+    // =====================================================
+    // отправка ajax
     $('.form').on('submit', function (e) {
         e.preventDefault();
         let t = $(this),
-            nameField = t.find('input[name=name]'),
-            phoneField = t.find('input[name=phone]'),
-            emailField = t.find('input[name=email]'),
-            nameVal = nameField.val(),
-            phoneVal = phoneField.val(),
-            emailVal = emailField.val();
+            isValid = validateFields(t);
 
-        if (nameVal.match(/[0-9]/) || nameVal.length < 2) {
-            nameField.css('border-color', 'red');
-            nameField.before('<div class="err" style = "color:red;">Введите корректное имя!</div>');
-            nameField.on('focus', function () {
-                nameField.css('border-color', '');
-                $('.err').remove();
-            });
-        }
-        else if (phoneVal && phoneVal.match(/_/) || phoneVal && phoneVal.length < 11) {
-            phoneField.css('border-color', 'red');
-            phoneField.before('<div class="err" style = "color:red;">Введите корректный номер телефона!</div>');
-            phoneField.on('focus', function () {
-                phoneField.css('border-color', '');
-                $('.err').remove();
-            });
-
-        }
-        else if (emailVal && !emailVal.match(/@/)) {
-            emailField.css('border-color', 'red');
-            emailField.before('<div class="err" style = "color:red;">Введите корректный номер телефона!</div>');
-            emailField.on('focus', function () {
-                emailField.css('border-color', '');
-                $('.err').remove();
-            });
-        }
-        else {
-            $('.err').remove();
+        if (isValid) {
             // t.find('button').prop("disabled", true);
             var fd = new FormData(e.target);
             fd.append('formname', t.attr('name'));
@@ -100,6 +149,7 @@ $(document).ready(function () {
             }).done(function () {
                 // showThanks();
                 t.trigger('reset');
+                t.find('.form__filename').text('Файл не выбран');
                 // window.location.href = "/thanks/";
             });
         }
