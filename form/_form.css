@@ -286,10 +286,11 @@ background: yellow;
     left: 0;
     z-index: 2;
     width: 100%;
-    max-height: 0;
     overflow: hidden;
     background: white;
-    transition: max-height 0.1s;
+     /*display: none; для jquery*/
+    max-height: 0; 
+    transition: max-height 0.1s; /* для js */
 }
 .js-select__options.open-on-top{
     top: auto;

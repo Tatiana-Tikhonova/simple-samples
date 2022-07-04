@@ -43,8 +43,6 @@ window.addEventListener('DOMContentLoaded', function () {
                 });
                 document.body.addEventListener('click', function (e) {
                     e.stopPropagation();
-                    console.log(e.target);
-
                     if (e.target != trigger || !e.target.closest('.js-select')) {
                         options.classList.remove('opened');
                         if (options.style.maxHeight) {
