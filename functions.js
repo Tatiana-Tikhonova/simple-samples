@@ -1,37 +1,44 @@
 // ====================================
-// позиция элемента относительно окна просмотра при прокрутке
+/**
+ * Определение позиции элемента относительно окна просмотра при прокрутке
+ * elem - элемент позицию которого надо определить
+ * elemHeight - высота элемента
+ * offset - расстояние от элемента до верхнего края окна просмотра (viewport)
+ * vh - высота окна просмотра (viewport)
+ */
 window.addEventListener('scroll', function (e) {
-    // элемент позицию которого надо определить
     let elem = document.querySelector('.form__colorpicker'),
-        // высота элемента
         elemHeight = elem.clientHeight,
-        // расстояние от элемента до верхнего края окна просмотра (viewport)
         offset = elem.getBoundingClientRect().top,
-        // высота скролла
-        scrollHeight = window.scrollY,
-        // расстояние от элемента до верхнего края документа
-        pos = scrollHeight + offset,
-        // высота окна просмотра (viewport)
         vh = window.innerHeight;
-
+    /**
+     * элемент выше окна просмотра
+     */
     if (offset <= -elemHeight) {
-        //    элемент выше окна просмотра
-        console.log('top');
+        //  console.log('top');
     }
+    /**
+     * элемент ниже окна просмотра
+     */
     if (offset >= vh) {
-        // элемент ниже окна
-        console.log('down');
+        //  console.log('down');
     }
+    /**
+     * элемент в окне просмотра
+     */
     if (offset > 0 && offset <= vh) {
-        // элемент в окне
-        console.log('in');
+        // console.log('in');
     }
+    /**
+     * элемент в нижней половине окна
+     */
     if (offset < vh && offset > (vh / 2)) {
-        // элемент в нижней половине окна
-        console.log('in down');
+        //  console.log('in down');
     }
+    /**
+     * элемент в верхней половине окна
+     */
     if (offset < vh && offset <= (vh / 2) && offset > -elemHeight) {
-        // элемент в верней половине окна
-        console.log('in top');
+        // console.log('in top');
     }
 });

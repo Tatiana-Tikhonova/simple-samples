@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->isSMTP();
         $mail->CharSet = "UTF-8";
         $mail->SMTPAuth   = true;
-        // $mail->SMTPDebug = 2;
+        $mail->SMTPDebug = 2;
         $mail->Debugoutput = function ($str, $level) {
             $GLOBALS['status'][] = $str;
         };
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
         // Отправка сообщения
-        if ($fname && $name && $phone) {
+        if ($fname && $name && $email) {
             $mail->isHTML(true);
             $mail->Subject = $title;
             $mail->Body = $body;
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } catch (Exception $e) {
         $result = "error";
-        $status = "Сообщение не было отправлено. Причина ошибки: 		{$mail->ErrorInfo}";
+        $status = "Сообщение не было отправлено. Причина ошибки: {$mail->ErrorInfo}";
     }
 
     // Отображение результата

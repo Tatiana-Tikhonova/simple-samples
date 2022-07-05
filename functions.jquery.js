@@ -1,30 +1,42 @@
 // ====================================
-// позиция элемента относительно окна просмотра при прокрутке
+/**
+ * Определение позиции элемента относительно окна просмотра при прокрутке
+ */
 $(window).on('scroll', function (e) {
-    // расстояние от элемента до верхнего края документа
-    let offset = $('.form__colorpicker').offset().top,
-        // высота окна просмотра (viewport)
+    /**
+     * offset - расстояние от целевого элемента до верхнего края документа
+     * vh - высота окна просмотра (viewport)
+     */
+    let = $('.form__colorpicker').offset().top,
         vh = $(window).height();
+    /**
+     * элемент выше окна просмотра
+     */
     if ($(window).scrollTop() > offset) {
-        //    элемент выше окна просмотра
-        console.log('top');
+        // console.log('top');
     }
+    /**
+     * элемент ниже окна просмотра
+     */
     if ($(window).scrollTop() <= offset - vh) {
-        // элемент ниже окна
-        console.log('down');
-
+        // console.log('down');
     }
+    /**
+     * элемент в окне просмотра
+     */
     if ($(window).scrollTop() > offset && $(window).scrollTop() <= offset - vh) {
-        // элемент в окне
-        console.log('in');
-
+        // console.log('in');
     }
+    /**
+     * элемент в нижней половине окна
+     */
     if ($(window).scrollTop() > offset - vh && $(window).scrollTop() <= offset - (vh / 2)) {
-        // элемент в нижней половине окна
-        console.log('in down');
+        // console.log('in down');
     }
+    /**
+     * элемент в верхней половине окна
+     */
     if ($(window).scrollTop() <= offset && $(window).scrollTop() > offset - (vh / 2)) {
-        // элемент в верней половине окна
-        console.log('in top');
+        // console.log('in top');
     }
 });

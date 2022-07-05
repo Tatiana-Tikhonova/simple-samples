@@ -1,7 +1,10 @@
 window.addEventListener('DOMContentLoaded', function () {
     // =====================================================
-    // placeholders
-    function bindPlaceholders() {
+    /**
+     * Обработка плейсхолдеров
+     * @function bindPlaceholders
+     */
+    (function bindPlaceholders() {
         let inputs = document.querySelectorAll('[placeholder]');
         inputs.forEach(function (input, i) {
             let placeholder = input.getAttribute('placeholder');
@@ -13,10 +16,13 @@ window.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-    }
-    bindPlaceholders();
+    }());
+
     // =====================================================
-    // селект
+    /**
+     * Кастомные селекты
+     * @function customSelect
+     */
     (function customSelect() {
         let selects = document.querySelectorAll('[data-select="custom"]');
         if (selects.length > 0) {
@@ -71,7 +77,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
     }());
     // =====================================================
-    // отображение имени файла при загрузке
+    /**
+     * отображение имени файла при загрузке
+     * @function bindFiles
+     */
     (function bindFiles() {
         let fileInputs = document.querySelectorAll('input[type=file]'),
             dots;
@@ -85,7 +94,11 @@ window.addEventListener('DOMContentLoaded', function () {
         });
 
     }());
-    //передача файлов при отправке формы
+    /**
+     * передача файлов при отправке формы
+     * @param {*} form 
+     * @returns {array} uploadedFiles
+     */
     function uploadFiles(form) {
         let fileInput = form.querySelector('input[type=file]'),
             uploadedFiles = fileInput.files;
@@ -93,7 +106,10 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
     // =====================================================
-    // проверка корректного заполнения полей при вводе
+    /**
+     * проверка корректного заполнения полей при вводе
+     * @function checkInputs
+     */
     (function checkInputs() {
         let inputs = document.querySelectorAll('input');
         inputs.forEach(function (input) {
@@ -124,7 +140,11 @@ window.addEventListener('DOMContentLoaded', function () {
         });
     }());
     // =====================================================
-    // валидация полей формы
+    /**
+     * валидация полей формы
+     * @param {*} form 
+     * @returns {boolean}
+     */
     function validateFields(form) {
 
         let isValid = false,
@@ -173,7 +193,12 @@ window.addEventListener('DOMContentLoaded', function () {
         }
         return isValid;
     }
-
+    /**
+     * Вывод сообщения об ошибке в поле формы
+     * @function addErrorMsg
+     * @param {*} field - текущее поле формы
+     * @param {*} msg - сообщение об ошибке
+     */
     function addErrorMsg(field, msg) {
         let errMessage = document.createElement('div');
         errMessage.classList.add('error-message');
@@ -188,6 +213,11 @@ window.addEventListener('DOMContentLoaded', function () {
             field.closest('form').insertBefore(errMessage, field);
         }
     }
+    /**
+     * Удаление сообщения об ошибке при правильном заполнении поля формы
+     * @function removeErrors
+     * @param {*} field 
+     */
     function removeErrors(field) {
         field.classList.remove('invalid');
         field.classList.add('validate');
@@ -197,7 +227,9 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     }
     // =====================================================
-    // отправка формы с XMLHttpRequest
+    /**
+     * отправка любой формы на странице с XMLHttpRequest
+     */
     function sendForm() {
         let forms = document.querySelectorAll('.form');
         forms.forEach(function (form) {
@@ -210,7 +242,7 @@ window.addEventListener('DOMContentLoaded', function () {
                         fd = new FormData(form);
                     fd.append('fname', fname);
                     let files = uploadFiles(form);
-                    if (files) { fd.append('files', files); }
+                    if (files.length > 0) { fd.append('files', files); }
                     req.open('POST', 'mailer.php', true);
                     req.onload = function () {
                         if (req.status >= 200 && req.status < 400) {
@@ -230,11 +262,49 @@ window.addEventListener('DOMContentLoaded', function () {
                     req.onerror = function () { console.log("Ошибка отправки запроса"); };
                     req.send(fd);
                 }
-
-
             });
         })
     }
-    sendForm();
+    // sendForm();
+    // =====================================================
+    /**
+     * отправка любой формы на странице с fetch
+     */
+    function fetchForm() {
+        let forms = document.querySelectorAll('.form');
+        forms.forEach(function (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                let isValid = validateFields(form),
+                    fname = form.getAttribute('name');
+                if (true === isValid) {
+                    let fd = new FormData(form);
+                    fd.append('fname', fname);
+                    let files = uploadFiles(form);
+                    if (files.length > 0) { fd.append('files', files); }
 
+                    fetch('mailer.php', {
+                        method: 'POST',
+                        body: fd,
+                    }).then(function (response) {
+                        if (response.status >= 200 && response.status < 400) {
+                            return response.json();
+                        }
+                        else { console.log("Ошибка сервера. Номер: " + response.status); }
+
+                    }).then(function (json) {
+                        if (json.result == "success") {
+                            // showThanks();
+                            form.reset();
+                            form.querySelector('.form__filename').textContent = 'Файл не выбран';
+                            // window.location.href = "https://mysite.ru/thanks/";
+                        } else {
+                            console.log("Ошибка. Сообщение не отправлено");
+                        }
+                    });
+                }
+            });
+        });
+    }
+    fetchForm();
 });
