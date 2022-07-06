@@ -22,6 +22,9 @@
         <input class="form__input" type="tel" name="phone" autocomplete="off" placeholder="Телефон">
         <!-- число -->
         <input class="form__input" type="number" name="number" min="1" max="10" step="1" value="1">
+        <!-- город (для скрипта яндекс карт - определение геолокации) -->
+        <input class="form__input" type="text" name="city" autocomplete="off" placeholder="Город*" aria-required="true">
+        <!-- сообщение -->
         <textarea class="form__textarea" name="message" autocomplete="off" maxlength="500"
             placeholder="Сообщение"></textarea>
         <!-- отправка файлов (multiple значит несколько) -->
@@ -207,6 +210,14 @@
     <script src="_form.js"></script>
     <!-- <script src="../functions.jquery.js"></script> -->
     <script src="../functions.js"></script>
+    <script src="//api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            jQuery("input[name=city]").val(ymaps.geolocation.city);
+            // jQuery("#user-region").text(ymaps.geolocation.region);
+            // jQuery("#user-country").text(ymaps.geolocation.country);
+        }
+    </script>
 </body>
 
 </html>

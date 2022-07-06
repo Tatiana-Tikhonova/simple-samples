@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal</title>
+    <link rel="stylesheet" href="modal.css">
+</head>
+
+<body>
+    <div><a href="#" class="modal-trigger" data-modal-trigger="modal-1">Open modal</a></div>
+    <div><a href="#" class="modal-trigger" data-modal-trigger="modal-1">Open modal 1</a></div>
+    <div><a href="#" class="modal-trigger" data-modal-trigger="modal-1">Open modal 2</a></div>
+    <!-- обычное модальное окно -->
+    <div class="modal" data-modal="modal-1">
+        <div class="modal__overlay" data-modal-close="modal-1">
+            <div class="modal__container">
+                <div class="modal__close">
+                    <button class="modal__close-trigger" data-modal-close="modal-1">&times;</button>
+                </div>
+                <div class="modal__content">
+                    <h3 class="modal__title">Обратная связь</h3>
+                    <p class="modal__text">Далеко-далеко за словесными горами в стране гласных, и согласных живут рыбные
+                        тексты. Несколько своего ему последний свою, назад маленький грустный залетают моей образ,
+                        семантика
+                        всеми жизни! Дал, снова океана за гор то переписали имени вдали, использовало языком точках, все
+                        заголовок рыбными коварный которое пор страну вопроса города курсивных над предложения свою
+                        дорогу.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- модальное окно "спасибо за заявку" -->
+    <div class="modal" data-thanks>
+        <div class="modal__overlay" data-thanks-close>
+            <div class="modal__container">
+                <div class="modal__close">
+                    <button class="modal__close-trigger" data-thanks-close>&times;</button>
+                </div>
+                <div class="modal__content">
+                    <h3 class="modal__title">Спасибо за обращение!</h3>
+                    <p class="modal__text">Мы обязательно перезвоним!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- фиксированное окошко без оверлея -->
+    <div><a href="#" class="fixed-modal-trigger" data-modal-trigger="modal-fixed">Fixed modal</a></div>
+    <div class="fixed-modal" data-modal="modal-fixed">
+        <div class="fixed-modal__close">
+            <button class="fixed-modal__close-trigger" data-modal-close="modal-fixed">&times;</button>
+        </div>
+        <div class="fixed-modal__content">
+            <h3 class="fixed-modal__title">Акция!</h3>
+            <p class="fixed-modal__text">Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные
+                тексты.
+                Свой, предупредила эта. Прямо ведущими напоивший встретил, запятой ipsum щеке путь образ себя большой
+                первую запятых приставка! Его, рыбного ее?</p>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- <script src="modal.jquery.js"></script> -->
+    <script src="modal.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background: url("bg.png") top center / cover no-repeat;
+}
+body.lock{
+    overflow: hidden;
+}
+.modal-trigger{
+
+}
+.modal {
+    width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 999999;
+}
+.modal__overlay {
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    backdrop-filter: blur(5px); /* Размываем фон */
+    background: rgba(255,255,255,0.3); /* Белый фон с полупрозрачностью */
+}
+
+.modal__container {
+    position: relative;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: white;
+   
+}
+.modal__close {
+    width: 100%;
+    text-align: right;
+}
+.modal__close-trigger{
+    padding: 0;
+    border: none;
+    background: transparent;
+    outline: transparent;
+    font-size: 36px;
+    line-height: 70%;
+    cursor: pointer;
+}
+.modal__content{
+    flex: 1 1 auto;
+}
+.modal__title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 130%;
+    text-align: center;
+    margin-bottom: 5px;
+}
+.modal__text {
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+/* скрываем модалки */
+[data-modal="modal-1"],
+[data-thanks]{
+    display: none;
+    
+}
+/* анимации для js */
+.modal__overlay_fadeIn{
+    opacity: 1;
+    animation: fadeIn 0.3s forwards;
+}
+@keyframes fadeIn {
+    0% { opacity: 0; }   
+    100% { opacity: 1; }
+}
+.modal__overlay_fadeOut{
+opacity: 0;
+animation: fadeOut 0.3s forwards;
+}
+@keyframes fadeOut {  
+    0% { opacity: 1; }
+    100% { opacity: 0; } 
+   }
+/* если высота экрана меньше минимальной высоты modal__container то позиционируем его верхнему краю modal__overlay */
+@media (max-height:500px){
+    .modal__overlay{
+        align-items: flex-start;
+    }
+}
+/* фиксированное окошко без оверлея */
+.fixed-modal-trigger {
+}
+
+.fixed-modal {
+    position: fixed;
+    right: -150%;
+    bottom: 10px;
+    width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    transition: right 0.6s;
+}
+.fixed-modal_visible{
+    right: 10px;
+    transition: right 0.6s;
+}
+.fixed-modal__close {
+    width: 100%;
+    text-align: right;
+}
+.fixed-modal__close-trigger {
+    padding: 0;
+    border: none;
+    background: transparent;
+    outline: transparent;
+    font-size: 24px;
+    line-height: 70%;
+    cursor: pointer;
+}
+.fixed-modal__content {
+}
+.fixed-modal__title {
+}
+.fixed-modal__text {
+}
