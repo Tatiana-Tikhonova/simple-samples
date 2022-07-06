@@ -13,27 +13,6 @@
     <!-- start -->
     <form id="send-file-form" class="form" name="Заявка" action="mailer.php" method="POST"
         enctype="multipart/form-data">
-        <div class="form__custom-select js-select" data-select="custom">
-            <button type="button" class="js-select__trigger" data-select="trigger">Выберите день 1</button>
-            <div class="js-select__options" data-select="options">
-                <input class="js-select__input" type="radio" name="week" id="day[0]" value="День не выбран">
-                <label class="js-select__label" for="day[0]">День не выбран</label>
-                <input class="js-select__input" type="radio" name="week" id="day[1]" value="Понедельник">
-                <label class="js-select__label" for="day[1]">Понедельник</label>
-                <input class="js-select__input" type="radio" name="week" id="day[2]" value="Вторник">
-                <label class="js-select__label" for="day[2]">Вторник</label>
-                <input class="js-select__input" type="radio" name="week" id="day[3]" value="Среда">
-                <label class="js-select__label" for="day[3]">Среда</label>
-                <input class="js-select__input" type="radio" name="week" id="day[4]" value="Четверг">
-                <label class="js-select__label" for="day[4]">Четверг</label>
-                <input class="js-select__input" type="radio" name="week" id="day[5]" value="Пятница">
-                <label class="js-select__label" for="day[5]">Пятница</label>
-                <input class="js-select__input" type="radio" name="week" id="day[6]" value="Суббота">
-                <label class="js-select__label" for="day[6]">Суббота</label>
-                <input class="js-select__input" type="radio" name="week" id="day[7]" value="Воскресенье">
-                <label class="js-select__label" for="day[7]">Воскресенье</label>
-            </div>
-        </div>
         <!-- имя -->
         <input class="form__input" type="text" name="name" autocomplete="off" placeholder="Имя*" aria-required="true">
         <!-- полю email задаем type="text" чтобы браузеры не вмешивались в валидацию со своими сообщениями -->
@@ -87,30 +66,6 @@
             </span>
             <span class="clearfloat"></span>
         </label>
-        <!-- кастомные псевдоселекты -->
-        <!-- с js -->
-
-        <div class="form__custom-select js-select" data-select="custom">
-            <button type="button" class="js-select__trigger" data-select="trigger">Выберите день 2</button>
-            <div class="js-select__options" data-select="options">
-                <input class="js-select__input" type="radio" name="week" id="week[0]" value="День не выбран">
-                <label class="js-select__label" for="week[0]">День не выбран</label>
-                <input class="js-select__input" type="radio" name="week" id="week[1]" value="Понедельник">
-                <label class="js-select__label" for="week[1]">Понедельник</label>
-                <input class="js-select__input" type="radio" name="week" id="week[2]" value="Вторник">
-                <label class="js-select__label" for="week[2]">Вторник</label>
-                <input class="js-select__input" type="radio" name="week" id="week[3]" value="Среда">
-                <label class="js-select__label" for="week[3]">Среда</label>
-                <input class="js-select__input" type="radio" name="week" id="week[4]" value="Четверг">
-                <label class="js-select__label" for="week[4]">Четверг</label>
-                <input class="js-select__input" type="radio" name="week" id="week[5]" value="Пятница">
-                <label class="js-select__label" for="week[5]">Пятница</label>
-                <input class="js-select__input" type="radio" name="week" id="week[6]" value="Суббота">
-                <label class="js-select__label" for="week[6]">Суббота</label>
-                <input class="js-select__input" type="radio" name="week" id="week[7]" value="Воскресенье">
-                <label class="js-select__label" for="week[7]">Воскресенье</label>
-            </div>
-        </div>
         <div class="form__btns">
             <input class="form__btn form__btn_submit button" type="submit" value="Отправить">
             <input class="form__btn form__btn_reset button" type="reset" value="Очистить">
@@ -168,6 +123,28 @@
             </optgroup>
         </select>
 
+        <!-- кастомные псевдоселекты с js -->
+        <div class="form__custom-select js-select" data-select="custom">
+            <button type="button" class="js-select__trigger" data-select="trigger">Выберите день 1</button>
+            <div class="js-select__options" data-select="options">
+                <input class="js-select__input" type="radio" name="week" id="day[0]" value="День не выбран">
+                <label class="js-select__label" for="day[0]">День не выбран</label>
+                <input class="js-select__input" type="radio" name="week" id="day[1]" value="Понедельник">
+                <label class="js-select__label" for="day[1]">Понедельник</label>
+                <input class="js-select__input" type="radio" name="week" id="day[2]" value="Вторник">
+                <label class="js-select__label" for="day[2]">Вторник</label>
+                <input class="js-select__input" type="radio" name="week" id="day[3]" value="Среда">
+                <label class="js-select__label" for="day[3]">Среда</label>
+                <input class="js-select__input" type="radio" name="week" id="day[4]" value="Четверг">
+                <label class="js-select__label" for="day[4]">Четверг</label>
+                <input class="js-select__input" type="radio" name="week" id="day[5]" value="Пятница">
+                <label class="js-select__label" for="day[5]">Пятница</label>
+                <input class="js-select__input" type="radio" name="week" id="day[6]" value="Суббота">
+                <label class="js-select__label" for="day[6]">Суббота</label>
+                <input class="js-select__input" type="radio" name="week" id="day[7]" value="Воскресенье">
+                <label class="js-select__label" for="day[7]">Воскресенье</label>
+            </div>
+        </div>
         <!-- радиокнопки -->
         <fieldset form="send-file-form">
             <!-- атрибут form для fieldset нужен если поля физически вне формы, но их нужно с ней связать -->

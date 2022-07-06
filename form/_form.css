@@ -242,9 +242,7 @@ background: yellow;
 .select-multiple__option:focus-visible{
     background: green!important;
 }
-/* кастомные селекты */
-
-/* селект с js */
+/* кастомные селекты с js */
 .form__custom-select {
     
 }
