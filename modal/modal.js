@@ -95,22 +95,30 @@ window.addEventListener('DOMContentLoaded', function () {
     /**
      * фиксированное окно - всплывает через 3 сек после загрузки страницы или при клике по триггеру 
      * закрывается через 3 сек или по клику
+     * @function showFixedModal
+     * @param {string} triggerSelector 
+     * @param {string} modalSelector 
+     * @param {string} closeSelector 
+     * @param {number} delay 
+     * @param {number} duration 
      */
-    function showFixedModal(triggerSelector, modalSelector, closeSelector, before = 3000, after = 3000) {
+    function showFixedModal(triggerSelector, modalSelector, closeSelector, delay = 3000, duration = 3000) {
         const modalTrigger = document.querySelector(triggerSelector),
             modal = document.querySelector(modalSelector),
             close = modal.querySelector(closeSelector);
-        console.log(modalTrigger, modal, close);
         setTimeout(function () {
             modal.classList.add('fixed-modal_visible');
             setTimeout(function () {
                 modal.classList.remove('fixed-modal_visible');
-            }, after);
-        }, before);
+            }, duration);
+        }, delay);
+        modalTrigger.addEventListener('click', function (e) {
+            modal.classList.add('fixed-modal_visible');
+        });
         close.addEventListener('click', function (e) {
             modal.classList.remove('fixed-modal_visible');
         });
 
     }
-    showFixedModal('[data-modal-trigger="modal-fixed"]', '[data-modal="modal-fixed"]', '[data-modal-close="modal-fixed"]', 3000, 3000);
+    showFixedModal('[data-modal-trigger="modal-fixed"]', '[data-modal="modal-fixed"]', '[data-modal-close="modal-fixed"]', 1000, 2000);
 });

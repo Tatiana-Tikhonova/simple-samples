@@ -1,0 +1,71 @@
+<!-- подключение скрипта яндекс карт для определения города, региона, страны и вывода в поле формы-->
+<script src="//api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        jQuery("input[name=city]").val(ymaps.geolocation.city);
+        // jQuery("input[name=region]").text(ymaps.geolocation.region);
+        // jQuery("input[name=country]").text(ymaps.geolocation.country);
+    }
+</script>
+<!-- ----------------------------------------- -->
+<!-- отложенное подключение скриптов
+	 для улучшения показателей скорости загрузки страницы -->
+
+<!-- вариант с jQuery -->
+<script>
+    jQuery(document).ready(function () {
+        let addScript = false;
+        jQuery(window).on('scroll', function () {
+            if (addScript === false) {
+                addScript = true;
+                setTimeout(function () {
+                    //здесь подключается метрика, чаты, карты
+                    // и остальные тормознутые скрипты
+                    //вставка в конец боди
+                    jQuery('body').append('<div>qwerty</div>');
+                    //или вставка в конкретный блок
+                    // jQuery('').html('');					
+                }, 1000);
+            }
+        });
+    });
+</script>
+<!-- подключение без скролла -->
+<script>
+    jQuery(document).ready(function () {
+        let addScript = false;
+        if (addScript === false) {
+            addScript = true;
+            setTimeout(function () {
+                //здесь подключается метрика, чаты, карты
+                // и остальные тормознутые скрипты
+                //вставка в конец боди
+                jQuery('body').append('<div>qwerty</div>');
+                //или вставка в конкретный блок
+                // jQuery('').html('');					
+            }, 1000);
+        }
+    });
+</script>
+
+<!-- чистый js -->
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        let addScript = false;
+        window.addEventListener('scroll', function () {
+            if (addScript === false) {
+                addScript = true;
+                setTimeout(function () {
+                    //здесь подключается метрика, чаты, карты
+                    // и остальные тормознутые скрипты
+                    //вставка в конец боди
+                    // document.body.appendChild('');
+                    //или вставка в конкретный блок
+                    let elem = document.querySelector('');
+                    elem.appendChild('');
+                }, 1000);
+            }
+        });
+    });
+</script>
+<!-- ----------------------------------------- -->

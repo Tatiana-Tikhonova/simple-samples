@@ -81,30 +81,160 @@ window.addEventListener('DOMContentLoaded', function () {
      * отображение имени файла при загрузке
      * @function bindFiles
      */
-    (function bindFiles() {
+    function bindFiles() {
         let fileInputs = document.querySelectorAll('input[type=file]'),
             dots;
         fileInputs.forEach(function (inp) {
             inp.addEventListener('change', function (e) {
-                let fileName = inp.files[0].name.split('.');
-                fileName[0].length > 10 ? dots = '...' : dots = '.';
-                let showName = inp.closest('.form__file').querySelector('.form__filename');
-                showName.textContent = fileName[0].substring(0, 10) + dots + fileName[1];
+                if (inp.closest('.form__file')) {
+                    let fileName = inp.files[0].name.split('.');
+                    fileName[0].length > 10 ? dots = '...' : dots = '.';
+                    let showName = inp.closest('.form__file').querySelector('.form__filename');
+                    showName.textContent = fileName[0].substring(0, 10) + dots + fileName[1];
+                }
+
             });
         });
 
-    }());
-    /**
-     * передача файлов при отправке формы
-     * @param {*} form 
-     * @returns {array} uploadedFiles
-     */
+    };
+    bindFiles()
     function uploadFiles(form) {
         let fileInput = form.querySelector('input[type=file]'),
             uploadedFiles = fileInput.files;
         return uploadedFiles;
     }
 
+    /**
+     * @function dragAndDrop -  загрузка нескольких файлов перетаскиванием
+     * с отображением превьюшек и шкалой прогресса
+     * drag * - срабатывает на перетаскиваемом элементе
+     * dragend * - срабатывает на перетаскиваемом элементе
+     * dragenter - срабатывает когда перетаскиваемый объект находится над dropArea
+     * dragexit * - срабатывает на перетаскиваемом элементе
+     * dragleave - срабатывает когда перетаскиваемый объект находится за пределами dropArea
+     * dragover - срабатывает когда перетаскиваемый объект зависает или двигается над dropArea
+     * dragstart * - срабатывает на перетаскиваемом элементе
+     * drop - срабатывает когда перетаскиваемый объект упал в dropArea
+     */
+    function dragAndDrop(dropZone, progress, gallery) {
+        const dropArea = document.querySelector(dropZone);
+        if (!dropArea) {
+            return;
+        }
+        const dropInput = dropArea.querySelector('input[type=file]'),
+            dropGallery = dropArea.querySelector(gallery),
+            progressBar = dropArea.querySelector(progress);
+        let uploadProgress = [];
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(function (eventName) {
+            dropArea.addEventListener(eventName, function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+        });
+        dropArea.addEventListener('drop', function (e) {
+            dropInput.files = e.dataTransfer.files;
+            let files = [...e.dataTransfer.files];
+            initializeProgress(files.length);
+            dropGallery.replaceChildren();
+            files.forEach(function (file, fileIndex) {
+                updateProgress(fileIndex, (e.loaded * 100.0 / e.total) || 100);
+                previewFile(file);
+                //загрузка файлов поштучно отдельно от остальных данных формы
+                // uploadFile(file, fileIndex); 
+            });
+        });
+        dropInput.addEventListener('change', function (e) {
+            let files = [...this.files];
+            initializeProgress(files.length);
+            dropGallery.replaceChildren();
+            files.forEach(function (file, fileIndex) {
+                updateProgress(fileIndex, (e.loaded * 100.0 / e.total) || 100);
+                previewFile(file);
+                //загрузка файлов поштучно отдельно от остальных данных формы
+                // uploadFile(file, fileIndex); 
+
+            });
+        });
+        /**
+         * @function previewFile - показывает превью файла
+         * @param {*} file 
+         */
+        function previewFile(file) {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = function () {
+                let img = document.createElement('img');
+                img.src = reader.result;
+                dropGallery.appendChild(img);
+
+            }
+        }
+        /**
+         * @function initializeProgress - запускает шкалу прогресса
+         * @param {number} numfiles 
+         */
+        function initializeProgress(numfiles) {
+            progressBar.value = 0;
+            uploadProgress = [];
+            for (let i = numfiles; i > 0; i--) {
+                uploadProgress.push(0);
+            }
+        }
+        /**
+         * @function updateProgress - обновляет шкалу прогресса
+         * @param {number} fileIndex
+         * @param {number} percent 
+         */
+        function updateProgress(fileIndex, percent) {
+            uploadProgress[fileIndex] = percent;
+            let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length;
+            progressBar.value = total;
+        }
+        /**
+     * Загрузка файлов на сервер поштучно отдельно от контактных данных fetch
+     * @param {*} file 
+     */
+        // function uploadFile(file) {
+        //     let url = 'mailer.php',
+        //         formData = new FormData();
+        //     formData.append('file', file);
+        //     fetch(url, {
+        //         method: 'POST',
+        //         body: formData
+        //     })
+        //         .then(updateProgress)
+        //         .catch(() => { /* Ошибка. Информируем пользователя */ });
+        // }
+
+        /**
+         * Загрузка файлов на сервер поштучно отдельно от контактных данных XMLHttpRequest
+         * @param {*} file 
+         * @param {*} i 
+         */
+        // function uploadFile(file, fileIndex) {
+        //     console.log(file);
+
+        //     var url = 'mailer.php',
+        //         xhr = new XMLHttpRequest(),
+        //         formData = new FormData();
+        //     xhr.open('POST', url, true);  // Добавили следующие слушатели
+        //     xhr.upload.addEventListener("progress", function (e) {
+        //         updateProgress(fileIndex, (e.loaded * 100.0 / e.total) || 100);
+        //     });
+        //     xhr.addEventListener('readystatechange', function (e) {
+        //         if (xhr.readyState == 4 && xhr.status == 200) {
+        //             updateProgress(fileIndex, 100);
+        //         }
+        //         else if (xhr.readyState == 4 && xhr.status != 200) {
+        //             // Ошибка. Сообщаем пользователю
+        //         }
+        //     });
+        //     formData.append('file', file);
+        //     xhr.send(formData);
+        // }
+
+    }
+    dragAndDrop('[data-upload="drag-and-drop"]', '[data-upload="drag-and-drop-progress"]', '[data-upload="drag-and-drop-gallery"]');
     // =====================================================
     /**
      * проверка корректного заполнения полей при вводе
@@ -241,8 +371,12 @@ window.addEventListener('DOMContentLoaded', function () {
                     const req = new XMLHttpRequest(),
                         fd = new FormData(form);
                     fd.append('fname', fname);
-                    let files = uploadFiles(form);
-                    if (files.length > 0) { fd.append('files', files); }
+                    // прикрепление нескольких файлов к форме (необязательно, прикрепляются и без этого)
+                    // let files = uploadFiles(form);
+                    // if (files.length > 0) { fd.append('files', files); }
+                    // прикрепление одного файла к форме (необязательно, прикрепляются и без этого)
+                    // let file = uploadFiles(form);
+                    // if (file.length > 0) { fd.append('file', file); }
                     req.open('POST', 'mailer.php', true);
                     req.onload = function () {
                         if (req.status >= 200 && req.status < 400) {
@@ -250,7 +384,8 @@ window.addEventListener('DOMContentLoaded', function () {
                             if (json.result == "success") {
                                 // showThanks();
                                 form.reset();
-                                form.querySelector('.form__filename').textContent = 'Файл не выбран';
+                                // - если при загрузке файла отображается его имя - очищаем
+                                // form.querySelector('.form__filename').textContent = 'Файл не выбран'; 
                                 // window.location.href = "https://mysite.ru/thanks/";
                             } else {
                                 console.log("Ошибка. Сообщение не отправлено");
@@ -265,7 +400,7 @@ window.addEventListener('DOMContentLoaded', function () {
             });
         })
     }
-    // sendForm();
+    sendForm();
     // =====================================================
     /**
      * отправка любой формы на странице с fetch
@@ -280,9 +415,12 @@ window.addEventListener('DOMContentLoaded', function () {
                 if (true === isValid) {
                     let fd = new FormData(form);
                     fd.append('fname', fname);
-                    let files = uploadFiles(form);
-                    if (files.length > 0) { fd.append('files', files); }
-
+                    // прикрепление нескольких файлов к форме (необязательно, прикрепляются и без этого)
+                    // let files = uploadFiles(form);
+                    // if (files.length > 0) { fd.append('files', files); }
+                    // прикрепление одного файла к форме (необязательно, прикрепляются и без этого)
+                    // let file = uploadFiles(form);
+                    // if (file.length > 0) { fd.append('file', file); }
                     fetch('mailer.php', {
                         method: 'POST',
                         body: fd,
@@ -296,15 +434,22 @@ window.addEventListener('DOMContentLoaded', function () {
                         if (json.result == "success") {
                             // showThanks();
                             form.reset();
-                            form.querySelector('.form__filename').textContent = 'Файл не выбран';
+                            // - если при загрузке файла отображается его имя - очищаем
+                            // form.querySelector('.form__filename').textContent = 'Файл не выбран';
                             // window.location.href = "https://mysite.ru/thanks/";
                         } else {
                             console.log("Ошибка. Сообщение не отправлено");
+                        }
+                    }).catch(function (json) {
+                        if (!json) {
+                            console.log("Ошибка сервера. Номер: " + response.status);
+
                         }
                     });
                 }
             });
         });
     }
-    fetchForm();
+    // fetchForm();
+
 });

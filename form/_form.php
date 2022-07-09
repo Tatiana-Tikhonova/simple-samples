@@ -11,13 +11,11 @@
 
 <body>
     <!-- start -->
-    <form id="send-file-form" class="form" name="Заявка" action="mailer.php" method="POST"
-        enctype="multipart/form-data">
+    <form id="send-file-form" class="form" name="Заявка" action="mailer.php" method="POST" enctype="multipart/form-data">
         <!-- имя -->
         <input class="form__input" type="text" name="name" autocomplete="off" placeholder="Имя*" aria-required="true">
         <!-- полю email задаем type="text" чтобы браузеры не вмешивались в валидацию со своими сообщениями -->
-        <input class="form__input" type="text" name="email" autocomplete="off" placeholder="Почта*"
-            aria-required="true">
+        <input class="form__input" type="text" name="email" autocomplete="off" placeholder="Почта*" aria-required="true">
         <!-- телефон -->
         <input class="form__input" type="tel" name="phone" autocomplete="off" placeholder="Телефон">
         <!-- число -->
@@ -25,16 +23,26 @@
         <!-- город (для скрипта яндекс карт - определение геолокации) -->
         <input class="form__input" type="text" name="city" autocomplete="off" placeholder="Город*" aria-required="true">
         <!-- сообщение -->
-        <textarea class="form__textarea" name="message" autocomplete="off" maxlength="500"
-            placeholder="Сообщение"></textarea>
+        <textarea class="form__textarea" name="message" autocomplete="off" maxlength="500" placeholder="Сообщение"></textarea>
         <!-- отправка файлов (multiple значит несколько) -->
-        <div class="form__file">
-            <label for="files">
-                <input id="files" form="send-file-form" type="file" name="files[]" multiple
+        <!-- <div class="form__file">
+            <label for="file">
+                <input id="file" form="send-file-form" type="file" name="file"
                     accept="image/jpg,image/jpeg,image/png,image/svg">
                 <span class="form__filebutton">Загрузить файл</span>
                 <span class="form__filename">Файл не выбран</span>
             </label>
+        </div> -->
+        <!-- drag-and-drop -->
+        <div class="drag-and-drop" id="drag-and-drop" data-upload="drag-and-drop">
+            <p class="drag-and-drop__text">drop your images or click to Browse</p>
+            <!-- drag-and-drop перетаскивание работает с несколькими файлами
+                атрибут name для загрузки нескольких файлов должен совпадать с параметром $_FILES['параметр'] в обработчике формы 
+            и иметь квадратные скобки как здесь: name="files[]"-->
+            <input class="drag-and-drop__input" id="drag-and-drop-input" data-upload="drag-and-drop-input" form="send-file-form" type="file" name="files[]" multiple accept="image/jpg,image/jpeg,image/png,image/svg">
+            <label for="drag-and-drop-input" class="drag-and-drop__btn">Select files</label>
+            <progress class="drag-and-drop__progress" data-upload="drag-and-drop-progress" id="progress-bar" max=100 value=0></progress>
+            <div class="drag-and-drop__gallery" id="drag-and-drop-gallery" data-upload="drag-and-drop-gallery"></div>
         </div>
         <!-- селекты -->
 
@@ -53,13 +61,11 @@
         </div>
 
         <!-- согласие -->
-        <input id="agreement" class="form__checkbox agreement__input" type="checkbox" name="agreement" checked
-            aria-required="true">
+        <input id="agreement" class="form__checkbox agreement__input" type="checkbox" name="agreement" checked aria-required="true">
         <label for="agreement" class="form__label agreement">
             <span class="form__label-check agreement__check">
                 <svg viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M6.97016 0.969986C7.11103 0.835875 7.29848 0.761733 7.49298 0.763205C7.68747 0.764677 7.87378 0.841647 8.0126 0.977874C8.15143 1.1141 8.2319 1.29893 8.23704 1.49336C8.24218 1.68779 8.17159 1.87661 8.04016 2.01999L4.05016 7.00999C3.98155 7.08389 3.89874 7.14319 3.80669 7.18435C3.71464 7.22552 3.61523 7.2477 3.51441 7.24956C3.41359 7.25143 3.31343 7.23295 3.21991 7.19522C3.1264 7.15749 3.04146 7.10129 2.97016 7.02999L0.324158 4.38399C0.250471 4.31532 0.191369 4.23252 0.150377 4.14052C0.109385 4.04853 0.0873427 3.94921 0.0855659 3.84851C0.0837892 3.74781 0.102314 3.64778 0.140035 3.55439C0.177756 3.461 0.233901 3.37617 0.305119 3.30495C0.376338 3.23373 0.461172 3.17758 0.55456 3.13986C0.647948 3.10214 0.747978 3.08362 0.84868 3.08539C0.949383 3.08717 1.0487 3.10921 1.1407 3.15021C1.2327 3.1912 1.3155 3.2503 1.38416 3.32399L3.47816 5.41699L6.95116 0.991987C6.95741 0.984288 6.96409 0.976943 6.97116 0.969986H6.97016Z" />
+                    <path d="M6.97016 0.969986C7.11103 0.835875 7.29848 0.761733 7.49298 0.763205C7.68747 0.764677 7.87378 0.841647 8.0126 0.977874C8.15143 1.1141 8.2319 1.29893 8.23704 1.49336C8.24218 1.68779 8.17159 1.87661 8.04016 2.01999L4.05016 7.00999C3.98155 7.08389 3.89874 7.14319 3.80669 7.18435C3.71464 7.22552 3.61523 7.2477 3.51441 7.24956C3.41359 7.25143 3.31343 7.23295 3.21991 7.19522C3.1264 7.15749 3.04146 7.10129 2.97016 7.02999L0.324158 4.38399C0.250471 4.31532 0.191369 4.23252 0.150377 4.14052C0.109385 4.04853 0.0873427 3.94921 0.0855659 3.84851C0.0837892 3.74781 0.102314 3.64778 0.140035 3.55439C0.177756 3.461 0.233901 3.37617 0.305119 3.30495C0.376338 3.23373 0.461172 3.17758 0.55456 3.13986C0.647948 3.10214 0.747978 3.08362 0.84868 3.08539C0.949383 3.08717 1.0487 3.10921 1.1407 3.15021C1.2327 3.1912 1.3155 3.2503 1.38416 3.32399L3.47816 5.41699L6.95116 0.991987C6.95741 0.984288 6.96409 0.976943 6.97116 0.969986H6.97016Z" />
                 </svg>
             </span>
             <span class="form__label-text agreement__text">
@@ -79,8 +85,7 @@
     <!-- inputs -->
     <div class="form">
         <!-- пароль -->
-        <input class="form__input" type="password" name="password" minlength="8" placeholder="Пароль"
-            aria-required="true">
+        <input class="form__input" type="password" name="password" minlength="8" placeholder="Пароль" aria-required="true">
         <!-- IE 11 и Opera Mini не понимают -->
         <!-- колорпикер -->
         <input class="form__colorpicker" type="color" name="color" value="#ffffff">
@@ -148,6 +153,8 @@
                 <label class="js-select__label" for="day[7]">Воскресенье</label>
             </div>
         </div>
+
+
         <!-- радиокнопки -->
         <fieldset form="send-file-form">
             <!-- атрибут form для fieldset нужен если поля физически вне формы, но их нужно с ней связать -->
@@ -181,8 +188,7 @@
             <label for="check-1" class="form__label">
                 <span class="form__label-check">
                     <svg viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M6.97016 0.969986C7.11103 0.835875 7.29848 0.761733 7.49298 0.763205C7.68747 0.764677 7.87378 0.841647 8.0126 0.977874C8.15143 1.1141 8.2319 1.29893 8.23704 1.49336C8.24218 1.68779 8.17159 1.87661 8.04016 2.01999L4.05016 7.00999C3.98155 7.08389 3.89874 7.14319 3.80669 7.18435C3.71464 7.22552 3.61523 7.2477 3.51441 7.24956C3.41359 7.25143 3.31343 7.23295 3.21991 7.19522C3.1264 7.15749 3.04146 7.10129 2.97016 7.02999L0.324158 4.38399C0.250471 4.31532 0.191369 4.23252 0.150377 4.14052C0.109385 4.04853 0.0873427 3.94921 0.0855659 3.84851C0.0837892 3.74781 0.102314 3.64778 0.140035 3.55439C0.177756 3.461 0.233901 3.37617 0.305119 3.30495C0.376338 3.23373 0.461172 3.17758 0.55456 3.13986C0.647948 3.10214 0.747978 3.08362 0.84868 3.08539C0.949383 3.08717 1.0487 3.10921 1.1407 3.15021C1.2327 3.1912 1.3155 3.2503 1.38416 3.32399L3.47816 5.41699L6.95116 0.991987C6.95741 0.984288 6.96409 0.976943 6.97116 0.969986H6.97016Z" />
+                        <path d="M6.97016 0.969986C7.11103 0.835875 7.29848 0.761733 7.49298 0.763205C7.68747 0.764677 7.87378 0.841647 8.0126 0.977874C8.15143 1.1141 8.2319 1.29893 8.23704 1.49336C8.24218 1.68779 8.17159 1.87661 8.04016 2.01999L4.05016 7.00999C3.98155 7.08389 3.89874 7.14319 3.80669 7.18435C3.71464 7.22552 3.61523 7.2477 3.51441 7.24956C3.41359 7.25143 3.31343 7.23295 3.21991 7.19522C3.1264 7.15749 3.04146 7.10129 2.97016 7.02999L0.324158 4.38399C0.250471 4.31532 0.191369 4.23252 0.150377 4.14052C0.109385 4.04853 0.0873427 3.94921 0.0855659 3.84851C0.0837892 3.74781 0.102314 3.64778 0.140035 3.55439C0.177756 3.461 0.233901 3.37617 0.305119 3.30495C0.376338 3.23373 0.461172 3.17758 0.55456 3.13986C0.647948 3.10214 0.747978 3.08362 0.84868 3.08539C0.949383 3.08717 1.0487 3.10921 1.1407 3.15021C1.2327 3.1912 1.3155 3.2503 1.38416 3.32399L3.47816 5.41699L6.95116 0.991987C6.95741 0.984288 6.96409 0.976943 6.97116 0.969986H6.97016Z" />
                     </svg>
                 </span>
                 <span class="form__label-text">check-1</span>
@@ -191,8 +197,7 @@
             <label for="check-2" class="form__label">
                 <span class="form__label-check">
                     <svg viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M6.97016 0.969986C7.11103 0.835875 7.29848 0.761733 7.49298 0.763205C7.68747 0.764677 7.87378 0.841647 8.0126 0.977874C8.15143 1.1141 8.2319 1.29893 8.23704 1.49336C8.24218 1.68779 8.17159 1.87661 8.04016 2.01999L4.05016 7.00999C3.98155 7.08389 3.89874 7.14319 3.80669 7.18435C3.71464 7.22552 3.61523 7.2477 3.51441 7.24956C3.41359 7.25143 3.31343 7.23295 3.21991 7.19522C3.1264 7.15749 3.04146 7.10129 2.97016 7.02999L0.324158 4.38399C0.250471 4.31532 0.191369 4.23252 0.150377 4.14052C0.109385 4.04853 0.0873427 3.94921 0.0855659 3.84851C0.0837892 3.74781 0.102314 3.64778 0.140035 3.55439C0.177756 3.461 0.233901 3.37617 0.305119 3.30495C0.376338 3.23373 0.461172 3.17758 0.55456 3.13986C0.647948 3.10214 0.747978 3.08362 0.84868 3.08539C0.949383 3.08717 1.0487 3.10921 1.1407 3.15021C1.2327 3.1912 1.3155 3.2503 1.38416 3.32399L3.47816 5.41699L6.95116 0.991987C6.95741 0.984288 6.96409 0.976943 6.97116 0.969986H6.97016Z" />
+                        <path d="M6.97016 0.969986C7.11103 0.835875 7.29848 0.761733 7.49298 0.763205C7.68747 0.764677 7.87378 0.841647 8.0126 0.977874C8.15143 1.1141 8.2319 1.29893 8.23704 1.49336C8.24218 1.68779 8.17159 1.87661 8.04016 2.01999L4.05016 7.00999C3.98155 7.08389 3.89874 7.14319 3.80669 7.18435C3.71464 7.22552 3.61523 7.2477 3.51441 7.24956C3.41359 7.25143 3.31343 7.23295 3.21991 7.19522C3.1264 7.15749 3.04146 7.10129 2.97016 7.02999L0.324158 4.38399C0.250471 4.31532 0.191369 4.23252 0.150377 4.14052C0.109385 4.04853 0.0873427 3.94921 0.0855659 3.84851C0.0837892 3.74781 0.102314 3.64778 0.140035 3.55439C0.177756 3.461 0.233901 3.37617 0.305119 3.30495C0.376338 3.23373 0.461172 3.17758 0.55456 3.13986C0.647948 3.10214 0.747978 3.08362 0.84868 3.08539C0.949383 3.08717 1.0487 3.10921 1.1407 3.15021C1.2327 3.1912 1.3155 3.2503 1.38416 3.32399L3.47816 5.41699L6.95116 0.991987C6.95741 0.984288 6.96409 0.976943 6.97116 0.969986H6.97016Z" />
                     </svg>
                 </span>
                 <span class="form__label-text">check-2</span>
@@ -200,22 +205,25 @@
         </fieldset>
 
         <!-- Скрытое поле с utm-меткой -->
-        <!-- <input type="hidden" name="utm_source" value="<?php if (isset($_GET[" utm_source"])) { echo $_GET["utm_source"];
-            } else if (isset($_COOKIE["utm_source"])) { echo $_COOKIE["utm_source"]; } ?>"> -->
+        <!-- <input type="hidden" name="utm_source" value="<?php if (isset($_GET[" utm_source"])) {
+                                                                echo $_GET["utm_source"];
+                                                            } else if (isset($_COOKIE["utm_source"])) {
+                                                                echo $_COOKIE["utm_source"];
+                                                            } ?>"> -->
     </div>
     <!-- end inputs -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- <script src="_form.jquery.js"></script> -->
     <script src="_form.js"></script>
     <!-- <script src="../functions.jquery.js"></script> -->
     <script src="../functions.js"></script>
+    <!-- подключение скрипта яндекс карт для определения города, региона, страны и вывода в поле формы-->
     <script src="//api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
     <script type="text/javascript">
-        window.onload = function () {
+        window.onload = function() {
             jQuery("input[name=city]").val(ymaps.geolocation.city);
-            // jQuery("#user-region").text(ymaps.geolocation.region);
-            // jQuery("#user-country").text(ymaps.geolocation.country);
+            // jQuery("input[name=region]").text(ymaps.geolocation.region);
+            // jQuery("input[name=country]").text(ymaps.geolocation.country);
         }
     </script>
 </body>

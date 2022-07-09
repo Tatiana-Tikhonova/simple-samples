@@ -54,5 +54,29 @@ $(document).ready(function () {
             $(documentBody).removeClass('lock');
         });
     }
-
+    /**
+    * фиксированное окно - всплывает через 3 сек после загрузки страницы или при клике по триггеру 
+    * закрывается через 3 сек или по клику
+    * @param {string} triggerSelector 
+    * @param {string} modalSelector 
+    * @param {string} closeSelector 
+    * @param {number} delay 
+    * @param {number} duration 
+    */
+    function showFixedModal(triggerSelector, modalSelector, closeSelector, delay = 3000, duration = 3000) {
+        const modal = $(modalSelector);
+        setTimeout(function () {
+            modal.addClass('fixed-modal_visible');
+            setTimeout(function () {
+                modal.removeClass('fixed-modal_visible');
+            }, duration);
+        }, delay);
+        $(triggerSelector).on('click', function (e) {
+            modal.addClass('fixed-modal_visible');
+        });
+        $(closeSelector).on('click', function (e) {
+            modal.removeClass('fixed-modal_visible');
+        });
+    }
+    showFixedModal('[data-modal-trigger="modal-fixed"]', '[data-modal="modal-fixed"]', '[data-modal-close="modal-fixed"]', 1000, 2000);
 });

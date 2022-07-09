@@ -11,8 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = strip_tags(trim($_POST['phone']));
     $email = strip_tags(trim($_POST['email']));
     $message = strip_tags(trim($_POST['message']));
+    // несколько файлов
     if (isset($_FILES['files'])) {
         $files = $_FILES['files'];
+    }
+    // один файл
+    if (isset($_FILES['file'])) {
+        $file = $_FILES['file'];
     }
 
     $title = "Новая заявка с сайта";
@@ -21,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <b>Имя:</b> $name<br>
     <b>Телефон:</b> $phone<br>
     <b>Email:</b> $email<br><br>
-   
     ";
 
     if ($_POST['message'] != '') {
@@ -49,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Получатель письма
         $mail->addAddress('tantikh2020@gmail.com');
 
-        // Прикрепление файлов к письму
+        // Прикрепление нескольких файлов к письму
         if (!empty($files['name'][0])) {
             for ($ct = 0; $ct < count($files['tmp_name']); $ct++) {
                 $uploadfile = tempnam(sys_get_temp_dir(), sha1($files['name'][$ct]));
@@ -62,12 +66,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
         }
+        // прикрепление одного файла
+        if (!empty($file['name'])) {
+            $uploadfile = tempnam(sys_get_temp_dir(), sha1($file['name']));
+            $filename = $file['name'];
+            if (move_uploaded_file($file['tmp_name'], $uploadfile)) {
+                $mail->addAttachment($uploadfile, $filename);
+                $rfile[] = "Файл $filename прикреплён";
+            } else {
+                $rfile[] = "Не удалось прикрепить файл $filename";
+            }
+        }
         // Отправка сообщения
         if ($fname && $name && $email) {
             $mail->isHTML(true);
             $mail->Subject = $title;
             $mail->Body = $body;
         }
+        $result = "";
         if ($mail->send()) {
             $result = "success";
         } else {
