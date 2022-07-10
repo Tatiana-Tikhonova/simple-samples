@@ -7,7 +7,7 @@ $(window).on('scroll', function (e) {
      * offset - расстояние от целевого элемента до верхнего края документа
      * vh - высота окна просмотра (viewport)
      */
-    let = $('.form__colorpicker').offset().top,
+    let offset = $('.form__colorpicker').offset().top,
         vh = $(window).height();
     /**
      * элемент выше окна просмотра

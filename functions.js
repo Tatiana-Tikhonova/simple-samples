@@ -77,7 +77,7 @@ const isTouchDevice = function () {
         (navigator.maxTouchPoints > 0) ||
         (navigator.msMaxTouchPoints > 0));
 }
-console.log('isTouchDevice ', isTouchDevice());
+// console.log('isTouchDevice ', isTouchDevice());
 // 
 /**
  * проверка на ховер - на пк возвращает true на мобилках false
@@ -89,5 +89,5 @@ let isHover;
 // 	isHover = false;
 // } 
 window.matchMedia("(any-hover:hover)").matches ? isHover = true : isHover = false;
-console.log('isHover ', isHover);
+// console.log('isHover ', isHover);
 // ====================================

@@ -27,8 +27,7 @@
         <!-- отправка файлов (multiple значит несколько) -->
         <!-- <div class="form__file">
             <label for="file">
-                <input id="file" form="send-file-form" type="file" name="file"
-                    accept="image/jpg,image/jpeg,image/png,image/svg">
+                <input id="file" form="send-file-form" type="file" name="file" accept="image/jpg,image/jpeg,image/png,image/svg">
                 <span class="form__filebutton">Загрузить файл</span>
                 <span class="form__filename">Файл не выбран</span>
             </label>
@@ -36,6 +35,8 @@
         <!-- drag-and-drop -->
         <div class="drag-and-drop" id="drag-and-drop" data-upload="drag-and-drop">
             <p class="drag-and-drop__text">drop your images or click to Browse</p>
+            <!-- drag-and-drop перетаскивание работает с одним файлом -->
+            <!-- <input class="drag-and-drop__input" id="drag-and-drop-input" data-upload="drag-and-drop-input" form="send-file-form" type="file" name="file" accept="image/jpg,image/jpeg,image/png,image/svg"> -->
             <!-- drag-and-drop перетаскивание работает с несколькими файлами
                 атрибут name для загрузки нескольких файлов должен совпадать с параметром $_FILES['параметр'] в обработчике формы 
             и иметь квадратные скобки как здесь: name="files[]"-->
@@ -212,18 +213,45 @@
                                                             } ?>"> -->
     </div>
     <!-- end inputs -->
+    <!-- скрипты jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <!-- <script src="_form.jquery.js"></script> -->
-    <script src="_form.js"></script>
-    <!-- <script src="../functions.jquery.js"></script> -->
-    <script src="../functions.js"></script>
+    <script src="jquery/placeholders.jquery.js"></script>
+    <script src="jquery/select.jquery.js"></script>
+    <script src="jquery/checkInputs.jquery.js"></script>
+    <script src="jquery/bindFiles.jquery.js"></script>
+    <script src="jquery/dragAndDrop.jquery.js"></script>
+    <script src="jquery/validate.jquery.js"></script>
+    <script src="jquery/form.jquery.js"></script>
+    <script src="../functions.jquery.js"></script>
+    <!-- скрипты js -->
+    <!-- <script src="js/placeholders.js"></script>
+    <script src="js/select.js"></script>
+    <script src="js/checkInputs.js"></script>
+    <script src="js/bindFiles.js"></script>
+    <script src="js/dragAndDrop.js"></script>
+    <script src="js/validate.js"></script>
+    <script src="js/xhrSendForm.js"></script>
+    <script src="js/fetchForm.js"></script>
+    <script src="../functions.js"></script> -->
     <!-- подключение скрипта яндекс карт для определения города, региона, страны и вывода в поле формы-->
     <script src="//api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+    <!-- гео jquery -->
     <script type="text/javascript">
         window.onload = function() {
-            jQuery("input[name=city]").val(ymaps.geolocation.city);
-            // jQuery("input[name=region]").text(ymaps.geolocation.region);
-            // jQuery("input[name=country]").text(ymaps.geolocation.country);
+            // jQuery("input[name=city]").val(ymaps.geolocation.city);
+            // jQuery("input[name=region]").val(ymaps.geolocation.region);
+            // jQuery("input[name=country]").val(ymaps.geolocation.country);
+        }
+    </script>
+    <!-- гео js -->
+    <script type="text/javascript">
+        window.onload = function() {
+            let cityInput = document.querySelector('input[name=city]');
+            let regionInput = document.querySelector('input[name=region]');
+            let countryInput = document.querySelector('input[name=country]');
+            cityInput ? cityInput.value = (ymaps.geolocation.city) : false;
+            regionInput ? regionInput.value = (ymaps.geolocation.city) : false;
+            countryInput ? countryInput.value = (ymaps.geolocation.city) : false;
         }
     </script>
 </body>
