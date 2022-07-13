@@ -1,0 +1,16 @@
+{
+    "cards": [
+        {
+            "src": "images/Chica.png",
+            "title": "Chica",
+            "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, mollitia.",
+            "link": "#"
+        },
+        {
+            "src": "images/Bonnie.png",
+            "title": "Bonnie",
+            "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, mollitia.",
+            "link": "#"
+        }
+    ]
+}

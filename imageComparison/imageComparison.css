@@ -1,0 +1,79 @@
+* {box-sizing: border-box;}
+.compare {
+    position: relative;
+    height: 400px; /*та же высота что у картинок*/
+}
+.compare__item {
+    position: absolute;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+}
+.compare__img {
+    display: block;
+    vertical-align: middle;
+}
+.compare__item-overlay {
+}
+.compare__slider{
+    position: absolute;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  /* cursor: ew-resize; */
+  /*set the appearance of the slider:*/
+  width: 50px;
+  height: 100%;  
+  cursor: col-resize;
+}
+.compare__slider-before,
+.compare__slider-after {
+    width: 2px;
+    height: calc(50% - 25px);
+    align-self: center;
+    background: white;
+}
+.compare__slider-control {
+    width: 50px;
+    height: 50px;
+    flex: 0 0 50px;
+    border-radius: 50%;
+    border: 2px solid white;
+    display: flex;justify-content:center;align-items: center;
+}
+.compare__slider-arl{
+
+}
+.compare__slider-arr{
+
+}
+/* =========================================== */
+.img-comp-container {
+  position: relative;
+  height: 200px; /*should be the same height as the images*/
+}
+
+.img-comp-img {
+  position: absolute;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+}
+
+.img-comp-img img {
+  display: block;
+  vertical-align: middle;
+}
+
+.img-comp-slider {
+  position: absolute;
+  z-index: 9;
+  cursor: ew-resize;
+  /*set the appearance of the slider:*/
+  width: 40px;
+  height: 40px;
+  background-color: #2196F3;
+  opacity: 0.7;
+  border-radius: 50%;
+}

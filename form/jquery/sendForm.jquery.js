@@ -97,12 +97,14 @@ $(document).ready(function () {
                 contentType: false,
                 type: 'POST',
 
-            }).done(function () {
-                // showThanks();
-                t.trigger('reset');
-                // t.find('.form__filename').text('Файл не выбран');
-                // window.location.href = "/thanks/";
-            });
+            })
+                .fail(function (e) { console.log(e.status, e.statusText); })
+                .done(function () {
+                    // showThanks();
+                    t.trigger('reset');
+                    // t.find('.form__filename').text('Файл не выбран');
+                    // window.location.href = "/thanks/";
+                });
         }
     });
 });

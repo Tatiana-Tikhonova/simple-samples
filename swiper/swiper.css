@@ -1,0 +1,22 @@
+*{
+    box-sizing: border-box;
+}
+
+.swiper {
+  width: 600px;
+  height: 300px;
+  overflow: hidden;  
+}
+.swiper-wrapper {
+}
+.swiper-slide {
+}
+.swiper-pagination {
+}
+.swiper-button-prev {
+}
+.swiper-button-next {
+}
+.swiper-scrollbar {
+}
+  

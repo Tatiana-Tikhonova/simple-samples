@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Comparison</title>
+    <link rel="stylesheet" href="imageComparison.css">
+</head>
+
+<body>
+    <div class="compare">
+        <div class="compare__item">
+            <img class="compare__img" src="images/Bonnie.png" alt="" width="600" height="400">
+        </div>
+        <div class="compare__slider">
+            <div class="compare__slider-before"></div>
+            <div class="compare__slider-control">
+                <svg class="compare__slider-arl" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 2L4 7L9 12" stroke="white" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <svg class="compare__slider-arr" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 2L10 7L5 12" stroke="white" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </div>
+            <div class="compare__slider-after"></div>
+        </div>
+        <div class="compare__item compare__item-overlay">
+            <img class="compare__img" src="images/Chica.png" alt="" width="600" height="400">
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="imageComparison.jquery.js"></script>
+    <!-- <script src="imageComparison.js"></script> -->
+</body>
+
+</html>
