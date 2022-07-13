@@ -41,7 +41,8 @@ window.addEventListener('DOMContentLoaded', function () {
                         fileInput = parentForm.querySelector('[type=file'),
                         fileName = parentForm.querySelector('.form__filename');
                     fileInput.files = null;
-                    fileName.textContent = 'Файл не выбран';
+                    if (fileName) { fileName.textContent = 'Файл не выбран'; }
+
                 });
             });
 

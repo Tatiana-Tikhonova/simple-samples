@@ -42,7 +42,9 @@
             и иметь квадратные скобки как здесь: name="files[]"-->
             <input class="drag-and-drop__input" id="drag-and-drop-input" data-upload="drag-and-drop-input" form="send-file-form" type="file" name="files[]" multiple accept="image/jpg,image/jpeg,image/png,image/svg">
             <label for="drag-and-drop-input" class="drag-and-drop__btn">Select files</label>
-            <progress class="drag-and-drop__progress" data-upload="drag-and-drop-progress" id="progress-bar" max=100 value=0></progress>
+            <div class="drag-and-drop__progress-bar">
+                <div class="drag-and-drop__progress-scale" data-upload="drag-and-drop-progress" style="width: 0%; transition: width 0.6s;"></div>
+            </div>
             <div class="drag-and-drop__gallery" id="drag-and-drop-gallery" data-upload="drag-and-drop-gallery"></div>
         </div>
         <!-- селекты -->
@@ -214,17 +216,17 @@
     </div>
     <!-- end inputs -->
     <!-- скрипты jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="jquery/placeholders.jquery.js"></script>
     <script src="jquery/select.jquery.js"></script>
     <script src="jquery/checkInputs.jquery.js"></script>
     <script src="jquery/bindFiles.jquery.js"></script>
     <script src="jquery/dragAndDrop.jquery.js"></script>
     <script src="jquery/validate.jquery.js"></script>
-    <script src="jquery/form.jquery.js"></script>
-    <script src="../functions.jquery.js"></script>
+    <script src="jquery/sendForm.jquery.js"></script>
+    <script src="../functions.jquery.js"></script> -->
     <!-- скрипты js -->
-    <!-- <script src="js/placeholders.js"></script>
+    <script src="js/placeholders.js"></script>
     <script src="js/select.js"></script>
     <script src="js/checkInputs.js"></script>
     <script src="js/bindFiles.js"></script>
@@ -232,7 +234,7 @@
     <script src="js/validate.js"></script>
     <script src="js/xhrSendForm.js"></script>
     <script src="js/fetchForm.js"></script>
-    <script src="../functions.js"></script> -->
+    <script src="../functions.js"></script>
     <!-- подключение скрипта яндекс карт для определения города, региона, страны и вывода в поле формы-->
     <script src="//api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
     <!-- гео jquery -->

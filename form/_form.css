@@ -344,10 +344,33 @@ border: 2px dashed #ccc;
 }
 .drag-and-drop__text {
 }
-.drag-and-drop__progress{
+
+
+.drag-and-drop__progress-bar{
 width: 100%;
+height: 10px;
 margin-bottom: 10px;
+background-color: #e9ecef;
+overflow: hidden;
 }
+.drag-and-drop__progress-scale{
+
+height: 100%;
+background-color: #343a40;
+background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+background-size: 10px 10px;
+/* transition: width .6s ease; */
+animation: progress-bar-stripes 1s linear infinite;
+}
+@keyframes progress-bar-stripes {
+    from { background-position: 10px 0; }
+    to { background-position: 0 0; }
+  }
+/** чтобы анимированный фон прогресс-бара не дергался, 
+* высота drag-and-drop__progress-bar,
+* background-size у drag-and-drop__progress-scale 
+* и первый аргумент у @keyframes from должны совпадать
+*/
 .drag-and-drop__btn {
     display: inline-block;
     margin-bottom: 10px;

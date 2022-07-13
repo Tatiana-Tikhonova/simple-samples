@@ -10,11 +10,11 @@ window.addEventListener('DOMContentLoaded', function () {
                 e.preventDefault();
                 // let isValid = validateFields(form); //функция в файле validate
                 let isValid = true; //заглушка, удалить
-                let fname = form.getAttribute('name');
+                let formname = form.getAttribute('name');
                 if (true === isValid) {
                     const req = new XMLHttpRequest(),
                         fd = new FormData(form);
-                    fd.append('fname', fname);
+                    fd.append('formname', formname);
                     // прикрепление нескольких файлов к форме (необязательно, прикрепляются и без этого)
                     // let files = uploadFiles(form);
                     // if (files.length > 0) { fd.append('files', files); }
@@ -45,8 +45,4 @@ window.addEventListener('DOMContentLoaded', function () {
         })
     }
     sendForm();
-
-
-
-
 });

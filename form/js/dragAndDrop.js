@@ -34,29 +34,32 @@ window.addEventListener('DOMContentLoaded', function () {
             let files = [];
             // проверка: инпут имеет атрибут multiple или нет
             null !== isMultiple ? files = [...dropInput.files] : files.push(dropInput.files[0]);
-            initializeProgress(files.length);
-            dropGallery.replaceChildren();
-            files.forEach(function (file, fileIndex) {
-                updateProgress(fileIndex, (e.loaded * 100.0 / e.total) || 100);
-                previewFile(file);
-                //загрузка файлов поштучно отдельно от остальных данных формы
-                // uploadFile(file, fileIndex); 
-            });
-
+            filesHandler(files);
         });
 
         dropInput.addEventListener('change', function (e) {
             let files = [...this.files];
-            initializeProgress(files.length);
+            filesHandler(files);
+        });
+
+        /**
+         * @function fileHandler - обработчик файлов
+         * @param {*} file 
+         */
+        function filesHandler(files) {
+            // если отправляем файлы поштучно отдельно от остальных данных формы,
+            // то  resetProgress и displayProgress здесь не нужен
+            resetProgress();
+            displayProgress();
             dropGallery.replaceChildren();
+            let filesLength = files.length;
+            // initializeProgress(filesLength);
             files.forEach(function (file, fileIndex) {
-                updateProgress(fileIndex, (e.loaded * 100.0 / e.total) || 100);
                 previewFile(file);
                 //загрузка файлов поштучно отдельно от остальных данных формы
-                // uploadFile(file, fileIndex); 
-
+                // uploadFile(file, fileIndex, filesLength);
             });
-        });
+        }
         /**
          * @function previewFile - показывает превью файла
          * @param {*} file 
@@ -72,25 +75,61 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         }
         /**
-         * @function initializeProgress - запускает шкалу прогресса
-         * @param {number} numfiles 
+         * @function resetProgress - обнуляет шкалу прогресса при прикреплении
+         * файлов к форме для последующей отправки вместе с контактными данными
          */
-        function initializeProgress(numfiles) {
-            progressBar.value = 0;
-            uploadProgress = [];
-            for (let i = numfiles; i > 0; i--) {
+        function resetProgress() {
+            progressBar.style.transition = 'width 0s';
+            progressBar.style.width = '0';
+            progressBar.style.backgroundImage = '';
+        }
+        /**
+         * @function displayProgress - заполняет шкалу прогресса на 100% при прикреплении
+         * файлов к форме для последующей отправки вместе с контактными данными
+         */
+        function displayProgress() {
+            progressBar.style.transition = 'width .5s';
+            progressBar.style.width = '100%';
+
+            setTimeout(function () {
+                progressBar.style.backgroundImage = 'none';
+            }, 500);
+
+        }
+        /**
+         * @function initializeProgress - обнуляет шкалу прогресса 
+         * и формирует массив для следующего отображения прогресса
+         * при загрузке файлов поштучно отдельно от контактных данных
+         * @param {number} numFiles
+         */
+        function initializeProgress(numFiles) {
+            progressBar.style.transition = 'width 0s';
+            progressBar.style.width = '0';
+            progressBar.style.backgroundImage = '';
+            uploadProgress = []
+            for (let i = numFiles; i > 0; i--) {
                 uploadProgress.push(0);
             }
         }
         /**
          * @function updateProgress - обновляет шкалу прогресса
-         * @param {number} fileIndex
-         * @param {number} percent 
+         * при загрузке файлов поштучно отдельно от контактных данных
+         * @param {number} fileIndex - индекс файла
+         * @param {number} numFiles - кол-во файлов
          */
-        function updateProgress(fileIndex, percent) {
-            uploadProgress[fileIndex] = percent;
-            let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length;
-            progressBar.value = total;
+
+        function updateProgress(fileIndex, numFiles) {
+            let range = 100,
+                part = 0;
+            0 == numFiles ? part = 0 : part = range / numFiles;
+            uploadProgress[fileIndex] = parseInt(part * (fileIndex + 1));
+            progressBar.style.transition = 'width 0.5s';
+            if (parseInt(progressBar.style.width) < range) {
+                progressBar.style.width = uploadProgress[fileIndex] + '%';
+            }
+            setTimeout(function () {
+                progressBar.style.backgroundImage = 'none';
+            }, 500);
         }
         // если дропзона в форме и у формы есть кнопка reset
         const parentForm = dropArea.closest('form'),
@@ -98,7 +137,7 @@ window.addEventListener('DOMContentLoaded', function () {
         if (null !== resetBtn) {
             resetBtn.addEventListener('click', function (e) {
                 dropInput.files = null;
-                initializeProgress(0);
+                resetProgress();
                 dropGallery.replaceChildren();
             });
         }
@@ -108,16 +147,28 @@ window.addEventListener('DOMContentLoaded', function () {
          * Загрузка файлов на сервер поштучно отдельно от контактных данных fetch
          * @param {*} file 
          */
-        // function uploadFile(file) {
-        //     let url = 'mailer.php',
+        // function uploadFile(file, fileIndex, numfiles) {
+        //     let url = 'uploader.php',
         //         formData = new FormData();
         //     formData.append('file', file);
-        //     fetch(url, {
+        //     let f = fetch(url, {
         //         method: 'POST',
         //         body: formData
-        //     })
-        //         .then(updateProgress(i, (e.loaded * 100.0 / e.total) || 100))
-        //         .catch(() => { /* Ошибка. Информируем пользователя */ });
+        //     }).then(function (response) {
+        //         if (response.status >= 200 && response.status < 400) {
+        //             return response.json();
+        //         }
+        //         else { console.log("Ошибка сервера. Номер: " + response.status); }
+        //     }).then(function (json) {
+        //         if (json.result == "success") {
+        //             updateProgress(fileIndex, numfiles);
+        //             previewFile(file);
+        //         } else { alert("Ошибка. Файл не был загружен. Попробуйте еще раз"); }
+        //     }).catch(function (json) {
+        //         if (!json) {
+        //             console.log("Ошибка сервера. Номер: " + response.status);
+        //         }
+        //     });
         // }
 
         /**
@@ -125,26 +176,26 @@ window.addEventListener('DOMContentLoaded', function () {
          * @param {*} file 
          * @param {*} i 
          */
-        // function uploadFile(file, fileIndex) {
+        function uploadFile(file, fileIndex, numfiles) {
 
-        //     var url = 'mailer.php',
-        //         xhr = new XMLHttpRequest(),
-        //         formData = new FormData();
-        //     xhr.open('POST', url, true);
-        //     xhr.upload.addEventListener("progress", function (e) {
-        //         updateProgress(fileIndex, (e.loaded * 100.0 / e.total) || 100);
-        //     });
-        //     xhr.addEventListener('readystatechange', function (e) {
-        //         if (xhr.readyState == 4 && xhr.status == 200) {
-        //             updateProgress(fileIndex, 100);
-        //         }
-        //         else if (xhr.readyState == 4 && xhr.status != 200) {
-        //             // Ошибка. Сообщаем пользователю
-        //         }
-        //     });
-        //     formData.append('file', file);
-        //     xhr.send(formData);
-        // }
+            let xhr = new XMLHttpRequest(),
+                formData = new FormData();
+            xhr.open('POST', 'uploader.php', true);
+            // xhr.upload.addEventListener("progress", function (e) {
+            //     updateProgress(fileIndex, numfiles);
+            // });
+            xhr.addEventListener('readystatechange', function (e) {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    updateProgress(fileIndex, numfiles);
+                    previewFile(file);
+                }
+                else if (xhr.readyState == 4 && xhr.status != 200) {
+                    // Ошибка. Сообщаем пользователю
+                }
+            });
+            formData.append('file', file);
+            xhr.send(formData);
+        }
 
     }
     dragAndDrop('[data-upload="drag-and-drop"]', '[data-upload="drag-and-drop-progress"]', '[data-upload="drag-and-drop-gallery"]');

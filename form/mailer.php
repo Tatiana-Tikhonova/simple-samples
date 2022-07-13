@@ -6,7 +6,7 @@ require 'phpmailer/SMTP.php';
 require 'phpmailer/Exception.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fname = trim($_POST['fname']);
+    $fname = trim($_POST['formname']);
     $name = strip_tags(trim($_POST['name']));
     $phone = strip_tags(trim($_POST['phone']));
     $email = strip_tags(trim($_POST['email']));
@@ -55,10 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Прикрепление нескольких файлов к письму
         if (!empty($files['name'][0])) {
-            for ($ct = 0; $ct < count($files['tmp_name']); $ct++) {
-                $uploadfile = tempnam(sys_get_temp_dir(), sha1($files['name'][$ct]));
-                $filename = $files['name'][$ct];
-                if (move_uploaded_file($files['tmp_name'][$ct], $uploadfile)) {
+            for ($i = 0; $i < count($files['tmp_name']); $i++) {
+                $uploadfile = tempnam(sys_get_temp_dir(), sha1($files['name'][$i]));
+                $filename = $files['name'][$i];
+                if (move_uploaded_file($files['tmp_name'][$i], $uploadfile)) {
                     $mail->addAttachment($uploadfile, $filename);
                     $rfile[] = "Файл $filename прикреплён";
                 } else {
@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->Subject = $title;
             $mail->Body = $body;
         }
-        $result = "";
+
         if ($mail->send()) {
             $result = "success";
         } else {
