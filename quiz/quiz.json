@@ -1,0 +1,103 @@
+{
+    "questions": [
+        {
+            "question": "1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui, tempora?",
+            "options": [
+                {
+                    "type": "radio",
+                    "name": "first",
+                    "value": "1",
+                    "text": "Lorem ipsum dolor sit amet consectetur.",
+                    "image": "images/Bonnie.png"
+                },
+                {
+                    "type": "radio",
+                    "name": "first",
+                    "value": "2",
+                    "text": "Lorem ipsum dolor sit amet consectetur.",
+                    "image": "images/Bonnie.png"
+                },
+                {
+                    "type": "radio",
+                    "name": "first",
+                    "value": "3",
+                    "text": "Lorem ipsum dolor sit amet consectetur.",
+                    "image": "images/Bonnie.png"
+                },
+                {
+                    "type": "radio",
+                    "name": "first",
+                    "value": "4",
+                    "text": "Other variant (write it here)"
+                }
+            ],
+            "userOption": [
+                {
+                    "type": "text",
+                    "name": "other",
+                    "placeholder": "Lorem ipsum dolor"
+                }
+            ]
+        },
+        {
+            "question": "2 Lorem ipsum dolor sit amet consecteturt. Qui, tempora?",
+            "options": [
+                {
+                    "type": "checkbox",
+                    "name": "second",
+                    "value": "12",
+                    "text": "Lorem ipsum dolor sit amet consectetur."
+                },
+                {
+                    "type": "checkbox",
+                    "name": "second",
+                    "value": "22",
+                    "text": "Lorem ipsum dolor sit amet consectetur."
+                },
+                {
+                    "type": "checkbox",
+                    "name": "second",
+                    "value": "32",
+                    "text": "Lorem ipsum dolor sit amet consectetur."
+                }
+            ]
+        },
+        {
+            "question": "3 Lorem ipsum dolor consecteturt. Qui, tempora?",
+            "options": [
+                {
+                    "type": "textarea",
+                    "name": "message",
+                    "placeholder": "Lorem ipsum dolor"
+                }
+            ]
+        },
+        {
+            "question": "4 Lorem ipsum dolor consecteturt",
+            "options": [
+                {
+                    "type": "text",
+                    "name": "name",
+                    "req": true,
+                    "placeholder": "Your name"
+                },
+                {
+                    "type": "text",
+                    "name": "email",
+                    "req": true,
+                    "placeholder": "Email"
+                },
+                {
+                    "type": "checkbox",
+                    "name": "agreement",
+                    "req": true,
+                    "text": "Нажимая кнопку «Отправить», я даю согласие на <a href=\"/confidential\" target=\"_blank\"> обработку персональных данных<\/a>, в соответствии с Федеральным законом от 27.07.2006 года №152-ФЗ «О персональных данных»"
+                },
+                {
+                    "type": "submit",
+                    "value": "Send"
+                }
+            ]
+        }
+    ]
+}

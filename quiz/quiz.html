@@ -9,13 +9,134 @@
     <link rel="stylesheet" href="quiz.css">
 </head>
 <div class="trigger-wrapper">
-    <a href="#" class="trigger">trigger 1</a><a href="#" class="trigger">trigger 2</a><button type="button"
-        class="trigger">trigger 3</button>
+    <h1 class="quiz__title">Lorem ipsum dolor sit amet consectetur.</h1>
+    <a href="#" class="trigger" data-quiz="trigger" data-modal-trigger="quiz">trigger 1</a>
+    <a href="#" class="trigger" data-quiz="trigger" data-modal-trigger="quiz">trigger 2</a>
+    <button type="button" class="trigger" data-quiz="trigger" data-modal-trigger="quiz">trigger 3</button>
 </div>
-<div class="quiz">
-    <form id="quiz" class="form" name="Quiz" action="quizMailer.php" method="POST" enctype="multipart/form-data">
 
-    </form>
+<div class="quiz" data-quiz="quiz" data-modal="quiz">
+    <div class="quiz__overlay" data-quiz="quiz-close" data-modal-close="quiz">
+        <div class="quiz__preloader quiz__preloader_visible" data-quiz="quiz-preloader">
+            <div class="quiz__preloader-icon"></div>
+            <h2 class="quiz__preloader-text">Wait...</h2>
+        </div>
+        <form id="quiz" data-quiz="quiz-form" class="quiz__form" name="Quiz" action="quizMailer.php" method="POST"
+            enctype="multipart/form-data">
+            <div class="quiz__close">
+                <button class="quiz__close-trigger" data-quiz="quiz-close" data-modal-close="quiz">&times;</button>
+            </div>
+            <div class="quiz__questions">
+                <!-- <div class="quiz__notice" data-quiz="notice"></div>
+                <div class="quiz__step quiz-step">
+                    <h2 class="quiz-step__question">Lorem ipsum dolor sit amet</h2>
+                    <fieldset class="quiz-step__options">
+                        <label for="" class="quiz-step__option option">
+                            <input class="option__input" type="radio" name="1" id="" value="1">
+                            <span class="option__radio"></span>
+                            <span class="option__text">Lorem ipsum dolor</span>
+                        </label>
+                        <label for="" class="quiz-step__option option">
+                            <input class="option__input" type="radio" name="1" id="" value="2">
+                            <span class="option__radio"></span>
+                            <span class="option__text">Lorem ipsum dolor</span>
+                        </label>
+                        <label for="" class="quiz-step__option option">
+                            <input class="option__input" type="radio" name="1" id="" value="3">
+                            <span class="option__radio"></span>
+                            <span class="option__text">Lorem ipsum dolor</span>
+                        </label>
+                        <label for="" class="quiz-step__option option">
+                            <input class="option__input" type="radio" name="1" id="" value="4">
+                            <span class="option__radio"></span>
+                            <span class="option__text">Other option (write it here)</span>
+                        </label>
+                        <textarea name="" id=""></textarea>
+                    </fieldset>
+                </div>
+                <div class="quiz__step quiz-step">
+                    <div class="quiz-step__header">
+                        <h2 class="quiz-step__question">Lorem ipsum dolor sit amet</h2>
+                    </div>
+                    <fieldset class="quiz-step__options">
+                        <label for="" class="quiz-step__option option">
+                            <input class="option__input" type="checkbox" name="2" id="" value="1">
+                            <span class="option__checkbox"></span>
+                            <span class="option__text">Lorem ipsum dolor</span>
+                        </label>
+                        <label for="" class="quiz-step__option option">
+                            <input class="option__input" type="checkbox" name="2" id="" value="2">
+                            <span class="option__checkbox"></span>
+                            <span class="option__text">Lorem ipsum dolor</span>
+                        </label>
+                        <label for="" class="quiz-step__option option">
+                            <input class="option__input" type="checkbox" name="2" id="" value="3">
+                            <span class="option__checkbox"></span>
+                            <span class="option__text">Lorem ipsum dolor</span>
+                        </label>
+                        <label for="" class="quiz-step__option option">
+                            <input class="option__input" type="checkbox" name="2" id="" value="4">
+                            <span class="option__checkbox"></span>
+                            <span class="option__text">Lorem ipsum dolor</span>
+                        </label>
+                    </fieldset>
+                </div>
+                <div class="quiz__step quiz-step">
+                    <div class="quiz-step__header">
+                        <h2 class="quiz-step__question">Lorem ipsum dolor consecteturt. Qui, tempora?</h2>
+                    </div>
+                    <fieldset class="quiz-step__options">
+                        <textarea name="" id=""></textarea>
+                    </fieldset>
+                </div>
+                <div class="quiz__step quiz-step">
+                    <div class="quiz-step__header">
+                        <h2 class="quiz-step__question">Lorem ipsum dolor consecteturt.</h2>
+                    </div>
+                    <fieldset class="quiz-step__options">
+                        <input class="quiz__input" type="text" name="name" autocomplete="off" placeholder="Имя*"
+                            aria-required="true">
+                        <input class="quiz__input" type="text" name="email" autocomplete="off" placeholder="Почта*"
+                            aria-required="true">
+                <input id="agreement" class="quiz__checkbox agreement__input" type="checkbox" name="agreement" checked
+                    aria-required="true">
+                <label for="agreement" class="quiz__label agreement">
+                    <span class="quiz__label-check agreement__check">
+                        <svg viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M6.97016 0.969986C7.11103 0.835875 7.29848 0.761733 7.49298 0.763205C7.68747 0.764677 7.87378 0.841647 8.0126 0.977874C8.15143 1.1141 8.2319 1.29893 8.23704 1.49336C8.24218 1.68779 8.17159 1.87661 8.04016 2.01999L4.05016 7.00999C3.98155 7.08389 3.89874 7.14319 3.80669 7.18435C3.71464 7.22552 3.61523 7.2477 3.51441 7.24956C3.41359 7.25143 3.31343 7.23295 3.21991 7.19522C3.1264 7.15749 3.04146 7.10129 2.97016 7.02999L0.324158 4.38399C0.250471 4.31532 0.191369 4.23252 0.150377 4.14052C0.109385 4.04853 0.0873427 3.94921 0.0855659 3.84851C0.0837892 3.74781 0.102314 3.64778 0.140035 3.55439C0.177756 3.461 0.233901 3.37617 0.305119 3.30495C0.376338 3.23373 0.461172 3.17758 0.55456 3.13986C0.647948 3.10214 0.747978 3.08362 0.84868 3.08539C0.949383 3.08717 1.0487 3.10921 1.1407 3.15021C1.2327 3.1912 1.3155 3.2503 1.38416 3.32399L3.47816 5.41699L6.95116 0.991987C6.95741 0.984288 6.96409 0.976943 6.97116 0.969986H6.97016Z" />
+                        </svg>
+                    </span>
+                    <span class="quiz__label-text agreement__text">
+                        Нажимая кнопку «Отправить», я даю согласие на <a href="/confidential" target="_blank">
+                            обработку персональных данных</a>, в соответствии с Федеральным законом от
+                        27.07.2006 года
+                        №152-ФЗ
+                        «О персональных данных»
+                    </span>
+                    <span class="clearfloat"></span>
+                    <input class="quiz__btn quiz__btn_submit button" type="submit" value="Отправить">
+                    </fieldset>
+            </div> -->
+            </div>
+            <div class="quiz__footer">
+                <div class="quiz__progress progress"></div>
+                <div class="quiz__buttons">
+                    <button type="button" class="quiz__btn" data-quiz="back">
+                        Back
+                    </button>
+                    <button type="button" class="quiz__btn quiz__btn_red" data-quiz="forward">
+                        Next
+                    </button>
+                </div>
+            </div>
+            <div class="quiz__success" data-quiz="success">
+                <h2 class="quiz__success-title">Thank you!</h2>
+                <p class="quiz__success-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse pariatur
+                    quaerat eligendi tempore quia ut eaque. Nemo incidunt cum ipsum?</p>
+            </div>
+        </form>
+    </div>
 </div>
 
 <body>
