@@ -5,79 +5,181 @@ window.addEventListener('DOMContentLoaded', function () {
         const quizTrigger = document.querySelectorAll('[data-quiz="trigger"]'),
             quiz = document.querySelector('[data-quiz="quiz"]'),
             overlay = quiz.firstElementChild,
-            quizContent = quiz.querySelector('[data-quiz="quiz-form"]'),
+            quizForm = quiz.querySelector('[data-quiz="quiz-form"]'),
             container = quiz.querySelector('.quiz__questions'),
             close = quiz.querySelectorAll('[data-quiz="quiz-close"]'),
-            preloader = document.querySelector('[data-quiz="quiz-preloader"]');
-        function printQuiz(data) {
+            preloader = document.querySelector('[data-quiz="quiz-preloader"]'),
+            next = quiz.querySelector('[data-quiz="next"]'),
+            back = quiz.querySelector('[data-quiz="back"]');
+
+        function printQuiz(data, callback) {
             const questions = data.questions,
                 questionsLength = data.questions.length;
             questions.forEach(function (item, i) {
                 printStep(item, i);
-
             });
+            callback();
         }
         function printStep(item, i) {
             let step = document.createElement('div');
             step.setAttribute('class', 'quiz__step quiz-step');
+            step.setAttribute('data-quiz-step', i);
             let quest = document.createElement('h2');
             quest.setAttribute('class', 'quiz-step__question');
+            quest.textContent = item.question;
             step.appendChild(quest);
+            let options = document.createElement('div');
+            options.setAttribute('class', 'quiz-step__options');
+            step.appendChild(options);
             for (let j = 0; j < item.options.length; j++) {
                 let opt = item.options[j];
 
                 if ('radio' == opt.type || 'checkbox' == opt.type) {
-                    let option = document.createElement('label');
-                    option.setAttribute('class', 'quiz-step__option option');
                     let inp = document.createElement('input');
                     inp.setAttribute('class', 'option__input');
                     inp.setAttribute('type', opt.type);
                     inp.setAttribute('name', opt.name);
+                    inp.setAttribute('id', opt.name + j);
                     inp.setAttribute('value', opt.value);
                     if (opt.req) {
-                        inp.setAttribute('aria-require', true);
+                        inp.setAttribute('aria-required', true);
                     }
-                    option.appendChild(inp);
+                    options.appendChild(inp);
+                    let option = document.createElement('label');
+                    option.setAttribute('class', 'quiz-step__option option option-' + opt.type);
+                    option.setAttribute('for', opt.name + j);
+                    if (opt.image) {
+                        let img = document.createElement('img');
+                        img.setAttribute('class', 'option__img');
+                        img.setAttribute('src', opt.image);
+                        option.classList.add('option-image-' + opt.type);
+                        option.appendChild(img);
+                    }
                     let check = document.createElement('span');
-                    check.setAttribute('class', 'option__' + opt.type);
+                    check.setAttribute('class', 'option__visible-' + opt.type);
                     option.appendChild(check);
                     let text = document.createElement('span');
                     text.setAttribute('class', 'option__text');
                     text.innerHTML = opt.text;
                     option.appendChild(text);
-                    if (opt.image) {
-                        let img = document.createElement('img');
-                        inp.setAttribute('class', 'option__img');
-                        img.setAttribute('src', opt.image);
-                        option.appendChild(img);
-                    }
-                    step.appendChild(option);
+
+                    options.appendChild(option);
                 }
-                else if ('textarea' == opt.type || 'text' == opt.type) {
+                else if ('textarea' == opt.type || 'input' == opt.type) {
                     let textField = document.createElement(opt.type);
-                    textField.setAttribute('class', 'quiz-step__option quiz-step__' + opt.type);
+                    textField.setAttribute('class', 'quiz-step__option option option-' + opt.type);
+                    textField.setAttribute('name', opt.name);
                     textField.setAttribute('placeholder', opt.placeholder);
-                    if (opt.req) {
-                        textField.setAttribute('aria-require', true);
+                    if ('input' == opt.type) {
+                        textField.setAttribute('type', 'text');
                     }
-                    step.appendChild(textField);
+                    if (opt.req) {
+                        textField.setAttribute('aria-required', true);
+                    }
+                    options.appendChild(textField);
                 }
                 else if ('submit' == opt.type) {
                     let sub = document.createElement('input');
                     sub.setAttribute('class', 'quiz__btn quiz__btn_submit button');
                     sub.setAttribute('type', opt.type);
                     sub.setAttribute('value', opt.value);
-                    step.appendChild(sub);
+                    options.appendChild(sub);
                 }
             }
             container.appendChild(step);
+            if (0 === i) {
+                step.classList.add('quiz-step_current');
+                step.style.display = 'block';
+            }
         }
         function printError(msg) {
-            let step = document.createElement('div');
-            step.setAttribute('class', 'quiz__step quiz-step');
-            step.textContent = msg;
-            container.appendChild(step);
+            let notice = quiz.querySelector('.quiz__notice');
+            notice.textContent = msg;
+            console.log(msg);
+
         }
+        function bindSteps() {
+            next.addEventListener('click', function (e) {
+                let current = container.querySelector('.quiz-step_current'),
+                    nextStep = current.nextElementSibling;
+                validateStep(current, nextStep);
+
+            });
+            back.addEventListener('click', function (e) {
+                let current = container.querySelector('.quiz-step_current'),
+                    prevStep = current.previousElementSibling;
+                navigateSteps(current, prevStep);
+            });
+            function navigateSteps(curr, target) {
+                if (target) {
+                    curr.classList.remove('quiz-step_current');
+                    curr.style.display = 'none';
+                    target.classList.add('quiz-step_current');
+                    target.style.display = 'block';
+                    target.classList.add('fadeIn');
+                }
+            }
+            function validateStep(curr, target) {
+                let req = curr.querySelectorAll('[aria-required="true"]'),
+                    checkboxes = curr.querySelectorAll('input[type=checkbox]'),
+                    radios = curr.querySelectorAll('input[type=radio]');
+                if (req.length > 0) {
+                    req.forEach(function (field, i) {
+                        if ('' == field.value) {
+                            printError("Заполните все обязательные поля!");
+                        } else {
+                            navigateSteps(curr, target);
+                            updateProgress(curr, 'next');
+                        }
+
+                    });
+                }
+                if (checkboxes.length > 0) {
+                    let isCheck = 0,
+                        name = '';
+                    checkboxes.forEach(function (ch, i) {
+                        if (ch.checked) isCheck++;
+                        name = ch.getAttribute('name');
+                    });
+                    if (0 == isCheck && 'agreement' != name) {
+                        printError("Выберите варианты!");
+                    } else {
+                        printError('');
+                        navigateSteps(curr, target);
+                        updateProgress(curr, 'next');
+                    }
+                }
+                if (radios.length > 0) {
+                    let isChecked = 0;
+                    radios.forEach(function (r, i) {
+                        if (r.checked) isChecked++;
+                    });
+                    if (0 == isChecked) {
+                        printError("Выберите вариант!");
+                    } else {
+                        printError('');
+                        navigateSteps(curr, target);
+                        updateProgress(curr, 'next');
+                    }
+                }
+            }
+        }
+        function updateProgress(curr) {
+            let stepsList = quiz.querySelectorAll('[data-quiz-step]'),
+                steps = stepsList.length - 1,
+                step = 100 / steps,
+                ind = +curr.getAttribute('data-quiz-step') + 1,
+                progress = quiz.querySelector('.progress__scale'),
+                progressNums = quiz.querySelector('.progress__steps'),
+                progressPerc = quiz.querySelector('.progress__percents');
+            progressNums.textContent = ind + '/' + (stepsList.length - 1);
+            progressPerc.textContent = parseInt(step * ind) + '%';
+            progress.style.width = (step * ind) + '%';
+            if ('100%' == progress.style.width) {
+                progress.style.backgroundImage = 'none';
+            }
+        }
+
         quizTrigger.forEach(function (trigger) {
             trigger.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -93,28 +195,33 @@ window.addEventListener('DOMContentLoaded', function () {
                 req.onload = function () {
                     if (req.status >= 200 && req.status < 400) {
                         let res = JSON.parse(this.response);
-                        printQuiz(res);
-
+                        const steps = document.querySelectorAll('[data-quiz-step]');
+                        if (steps.length == 0) {
+                            printQuiz(res, bindSteps);
+                        }
                     } else {
                         let msg = "Ошибка сервера. Номер: " + req.status;
                         printError(msg);
                     }
                 };
-                req.onerror = printError("Ошибка отправки запроса");
+                req.onerror = function (e) {
+                    console.log("Ошибка отправки запроса " + e);
+
+                }
                 req.send();
                 overlay.classList.add('quiz__overlay_fadeIn');
                 documentBody.classList.add('lock');
                 documentBody.style.paddingRight = scrollbarWidth + 'px';
                 setTimeout(function () {
                     preloader.classList.remove('quiz__preloader_visible');
-                    quizContent.style.display = 'flex';
+                    quizForm.style.display = 'flex';
                 }, 2000);
 
 
             });
         });
-        close.forEach(function (item) {
-            item.addEventListener('click', function (e) {
+        close.forEach(function (cl) {
+            cl.addEventListener('click', function (e) {
                 e.stopPropagation();
                 if (e.target == e.currentTarget) {
                     overlay.classList.remove('quiz__overlay_fadeIn');
@@ -129,6 +236,65 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
             });
         });
+        function submitQuiz(form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                let isValid = validateContacts(form);
+                console.log(isValid);
+
+            });
+        }
+        submitQuiz(quizForm);
+        function validateContacts(fm) {
+            let isValid = false,
+                nameField = fm.querySelector('input[name=name]'),
+                emailField = fm.querySelector('input[name=email]'),
+                agreement = fm.querySelector('input[name=agreement]');
+            console.log(nameField, emailField);
+
+            if (nameField.getAttribute('aria-required') && '' == nameField.value) {
+                printError('Пожалуйста, заполните все поля!');
+                nameField.classList.add('invalid');
+            }
+            else if ('' != nameField.value && nameField.value.length < 2) {
+                printError('Имя не менее 2-х букв!');
+                nameField.classList.add('invalid');
+            }
+            else {
+                // printError('');
+                nameField.classList.remove('invalid');
+                nameField.classList.add('validate');
+            }
+
+            if (emailField.getAttribute('aria-required') && '' == emailField.value) {
+                printError('Пожалуйста, заполните все поля!');
+                emailField.classList.add('invalid');
+            }
+            else if ('' != emailField.value && !emailField.value.match(/@/)) {
+                printError('Введите адрес электронной почты!');
+                emailField.classList.add('invalid');
+            }
+            else {
+                // printError('');
+                emailField.classList.remove('invalid');
+                emailField.classList.add('validate');
+            }
+            if (!agreement.checked) {
+                printError('Подтвердите согласие на обработку персональных данных!');
+                agreement.classList.add('invalid');
+            }
+            else {
+                // printError('');
+                agreement.classList.remove('invalid');
+                agreement.classList.add('validate');
+            }
+            if (nameField.classList.contains('validate') &&
+                emailField.classList.contains('validate') &&
+                agreement.classList.contains('validate')) {
+                isValid = true;
+            }
+            return isValid;
+        }
     }
 
     showQuiz();

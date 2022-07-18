@@ -1,6 +1,11 @@
 *{
     box-sizing: border-box;
 }
+img{
+    max-width: 100%;
+    height: auto;
+    vertical-align: top;
+}
 body.lock{
     overflow: hidden;
 }
@@ -79,13 +84,14 @@ animation: fadeOut 0.3s forwards;
 .quiz__form{
     position: relative;
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
     background: white;
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
     display: none;
 }
 /* если высота экрана меньше минимальной высоты quiz__form то позиционируем его верхнему краю modal__overlay */
@@ -111,30 +117,159 @@ animation: fadeOut 0.3s forwards;
     flex: 1 1 auto;
 }
 .quiz__step {
+    /* position: absolute; top: 0;left: 0; z-index: 1; */
+    width: 100%;
 }
 .quiz-step {
+    /* transition:opacity 0.2s; */
+   display: none;
 }
-.quiz-step__header{
+.quiz-step.fadeIn{
+    animation:fadeIn 0.4s;
+}
+@keyframes fadeIn {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.quiz-step.fadeOut{
+    opacity: 0;
+}
+.quiz-step.quiz-step_current{
+    display: block;
 
 }
+
 .quiz-step__question {
 }
 .quiz-step__options {
+    display: flex;
+    flex-wrap: wrap;
 }
 .quiz-step__option {
-    margin-bottom: 10px;
-}
-.option {
-    display: flex;
-    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
     cursor: pointer;
 }
+.option {
+    display: flex;flex-wrap: wrap;
+    align-items: center;
+}
+[type="radio"],
+[type="checkbox"]{
+    display: none;
+}
+.option-radio,
+.option-checkbox{
+
+}
+.option-radio{
+
+}
+.option-checkbox{
+
+}
+.option-image-radio,
+.option-image-checkbox{
+    width: calc(50% - 20px);
+    margin: 0 10px 10px 10px;
+}
+.option-input,
+.option-textarea{
+    width: 100%;
+    padding: 10px;
+    outline: transparent;
+    border: 1px solid black;
+}
+.option-input{
+
+}
+.option-textarea{
+resize: none;
+}
+.option__visible-radio,
+.option__visible-checkbox{
+    position: relative;
+    display: inline-block;
+width: 20px;
+height: 20px;
+margin-right: 10px;
+border: 1px solid black;
+}
+.option__visible-radio::after,
+.option__visible-checkbox::after{
+    content:''; 
+    width: 10px; 
+    height: 10px; 
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    margin-top: -5px;
+    margin-left: -5px;
+    background-color: black;
+    opacity: 0;
+}
+.option__visible-radio,
+.option__visible-radio::after{
+    border-radius: 50%;
+}
+[type="radio"]:checked +.option-radio .option__visible-radio::after,
+[type="checkbox"]:checked +.option-checkbox .option__visible-checkbox::after{
+    opacity: 1;
+}
+.option__visible-radio::after{
+
+}
+.option__visible-checkbox{
+    
+}
 .quiz__footer {
+    width: 100%;
+    padding: 10px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 .quiz__progress {
+    flex: 1 1 auto;
+    margin-right: 10px;
 }
 .progress {
+    display: flex;
+    flex-wrap: wrap;
 }
+.progress__text,
+.progress__steps,
+.progress__percents {
+    margin-right: 10px;
+}
+.progress__bar {
+    width: 100%;
+    height: 10px;
+    margin-top: 10px;
+    background-color: #e9ecef;
+    overflow: hidden;
+}
+.progress__scale {
+height: 100%;
+background-color: #343a40;
+background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+background-size: 10px 10px;
+/* transition: width .6s ease; */
+animation: progress-bar-stripes 1s linear infinite;
+}
+@keyframes progress-bar-stripes {
+    from { background-position: 10px 0; }
+    to { background-position: 0 0; }
+  }
+/** чтобы анимированный фон прогресс-бара не дергался, 
+* высота drag-and-drop__progress-bar,
+* background-size у drag-and-drop__progress-scale 
+* и первый аргумент у @keyframes from должны совпадать
+*/
 .quiz__buttons {
 }
 .quiz__btn {
@@ -149,7 +284,7 @@ animation: fadeOut 0.3s forwards;
 }
 .quiz__checkbox,
 .agreement__input {
-    display: none;
+    /* display: none; */
 }
 .agreement__input {
 }
@@ -172,6 +307,7 @@ animation: fadeOut 0.3s forwards;
 .button {
 }
 .quiz__success {
+    display: none;
 }
 .quiz__success-title {
 }

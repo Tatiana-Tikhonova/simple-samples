@@ -8,7 +8,7 @@
                     "name": "first",
                     "value": "1",
                     "text": "Lorem ipsum dolor sit amet consectetur.",
-                    "image": "images/Bonnie.png"
+                    "image": "images/Chica.png"
                 },
                 {
                     "type": "radio",
@@ -22,18 +22,16 @@
                     "name": "first",
                     "value": "3",
                     "text": "Lorem ipsum dolor sit amet consectetur.",
-                    "image": "images/Bonnie.png"
+                    "image": "images/Chica.png"
                 },
                 {
                     "type": "radio",
                     "name": "first",
-                    "value": "4",
+                    "value": "other",
                     "text": "Other variant (write it here)"
-                }
-            ],
-            "userOption": [
+                },
                 {
-                    "type": "text",
+                    "type": "input",
                     "name": "other",
                     "placeholder": "Lorem ipsum dolor"
                 }
@@ -68,6 +66,7 @@
                 {
                     "type": "textarea",
                     "name": "message",
+                    "req": true,
                     "placeholder": "Lorem ipsum dolor"
                 }
             ]
@@ -76,13 +75,13 @@
             "question": "4 Lorem ipsum dolor consecteturt",
             "options": [
                 {
-                    "type": "text",
+                    "type": "input",
                     "name": "name",
                     "req": true,
                     "placeholder": "Your name"
                 },
                 {
-                    "type": "text",
+                    "type": "input",
                     "name": "email",
                     "req": true,
                     "placeholder": "Email"
@@ -91,6 +90,7 @@
                     "type": "checkbox",
                     "name": "agreement",
                     "req": true,
+                    "value": "agree",
                     "text": "Нажимая кнопку «Отправить», я даю согласие на <a href=\"/confidential\" target=\"_blank\"> обработку персональных данных<\/a>, в соответствии с Федеральным законом от 27.07.2006 года №152-ФЗ «О персональных данных»"
                 },
                 {
