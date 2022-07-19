@@ -1,78 +1,86 @@
 {
     "questions": [
         {
-            "question": "1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui, tempora?",
+            "question": "1 Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты?",
             "options": [
                 {
                     "type": "radio",
-                    "name": "first",
-                    "value": "1",
+                    "req": "false",
+                    "name": "Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты?",
+                    "value": "Lorem ipsum dolor sit amet consectetur.",
                     "text": "Lorem ipsum dolor sit amet consectetur.",
                     "image": "images/Chica.png"
                 },
                 {
                     "type": "radio",
-                    "name": "first",
-                    "value": "2",
+                    "req": "false",
+                    "name": "Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты?",
+                    "value": "Lorem ipsum dolor sit amet.",
                     "text": "Lorem ipsum dolor sit amet consectetur.",
                     "image": "images/Bonnie.png"
                 },
                 {
                     "type": "radio",
-                    "name": "first",
-                    "value": "3",
+                    "req": "false",
+                    "name": "Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты?",
+                    "value": "Lorem ipsum dolor consectetur.",
                     "text": "Lorem ipsum dolor sit amet consectetur.",
                     "image": "images/Chica.png"
                 },
                 {
                     "type": "radio",
-                    "name": "first",
+                    "req": "false",
+                    "name": "Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты?",
                     "value": "other",
                     "text": "Other variant (write it here)"
                 },
                 {
                     "type": "input",
+                    "req": "false",
                     "name": "other",
                     "placeholder": "Lorem ipsum dolor"
                 }
             ]
         },
         {
-            "question": "2 Lorem ipsum dolor sit amet consecteturt. Qui, tempora?",
+            "question": "2 Далеко-далеко в стране гласных и согласных живут рыбные тексты?",
             "options": [
                 {
                     "type": "checkbox",
-                    "name": "second",
-                    "value": "12",
+                    "req": "false",
+                    "name": "Далеко-далеко в стране гласных и согласных живут рыбные тексты?[]",
+                    "value": "Lorem ipsum dolor sit amet consectetur.",
                     "text": "Lorem ipsum dolor sit amet consectetur."
                 },
                 {
                     "type": "checkbox",
-                    "name": "second",
-                    "value": "22",
+                    "req": "false",
+                    "name": "Далеко-далеко в стране гласных и согласных живут рыбные тексты?[]",
+                    "value": "Lorem ipsum dolor sit.",
                     "text": "Lorem ipsum dolor sit amet consectetur."
                 },
                 {
                     "type": "checkbox",
-                    "name": "second",
-                    "value": "32",
+                    "req": "false",
+                    "name": "Далеко-далеко в стране гласных и согласных живут рыбные тексты?[]",
+                    "value": "Lorem ipsum dolor.",
                     "text": "Lorem ipsum dolor sit amet consectetur."
                 }
             ]
         },
         {
-            "question": "3 Lorem ipsum dolor consecteturt. Qui, tempora?",
+            "question": "3 Далеко-далеко за словесными горами живут рыбные тексты?",
             "options": [
                 {
                     "type": "textarea",
-                    "name": "message",
+                    "name": "Далеко-далеко за словесными горами живут рыбные тексты?",
                     "req": true,
                     "placeholder": "Lorem ipsum dolor"
                 }
             ]
         },
         {
-            "question": "4 Lorem ipsum dolor consecteturt",
+            "question": "4 Отправка формы",
             "options": [
                 {
                     "type": "input",
@@ -95,6 +103,7 @@
                 },
                 {
                     "type": "submit",
+                    "req": "false",
                     "value": "Send"
                 }
             ]

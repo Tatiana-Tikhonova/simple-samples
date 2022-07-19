@@ -8,9 +8,57 @@ require 'phpmailer/Exception.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fname = trim($_POST['formname']);
     $name = strip_tags(trim($_POST['name']));
-    $phone = strip_tags(trim($_POST['phone']));
     $email = strip_tags(trim($_POST['email']));
-    $message = strip_tags(trim($_POST['message']));
+    $user_ip = $_SERVER['REMOTE_ADDR'];
+    $utm_source = $_POST['utm_source'] ?? 'нет';
+    $title = 'Результаты теста';
+    $body = "
+    <table style=\"border-collapse:collapse;font-size:16px;line-height:1.5;width:100%;\"width=\"100%\" cellspacing=\"0\";cellpadding=\"0\";border=\"0\">
+    <tbody>
+    <tr style=\"border-color:transparent\">
+	<td cellpadding=\"0\"; cellspacing=\"0\"style=\"border-collapse:collapse;border-color:transparent;padding:5px;\">
+	<b>Ip-адрес отправителя:</b> $user_ip<br>
+	<b>Рекламная система:</b> $utm_source<br>
+	<b>Имя отправителя:</b> $name<br>
+	<b>Email отправителя:</b> $email<br>
+	</td>
+	</tr>
+    ";
+    unset($_POST['formname']);
+    unset($_POST['email']);
+    unset($_POST['name']);
+    unset($_POST['agreement']);
+    unset($_POST['utm_source']);
+    unset($_POST['other']);
+    foreach ($_POST as $key => $value) {
+        if ($value) {
+            $key = str_replace('_', ' ', $key);
+            if (is_array($value)) {
+                $str = implode('<br>', $value);
+                $body .= "<tr style=\"border-color:transparent\">
+                <td cellpadding=\"0\"; cellspacing=\"0\"style=\"border-collapse:collapse;border-color:transparent;padding:5px;\">
+                <b>$key</b>
+                </td>
+                </tr>
+                <tr style=\"border-color:transparent\">
+                <td cellpadding=\"0\"; cellspacing=\"0\"style=\"border-collapse:collapse;border-color:transparent;padding:5px;\">
+                $str
+                </td>
+                </tr>";
+            } else {
+                $body .= "<tr style=\"border-color:transparent\">
+                <td cellpadding=\"0\"; cellspacing=\"0\"style=\"border-collapse:collapse;border-color:transparent;padding:5px;\">
+                <b>$key</b>
+                </td>
+                </tr><tr style=\"border-color:transparent\">
+                <td cellpadding=\"0\"; cellspacing=\"0\"style=\"border-collapse:collapse;border-color:transparent;padding:5px;\">
+                $value
+                </td>
+                </tr>";
+            }
+        }
+    }
+    $body .= "</tbody></table>";
     // несколько файлов
     if (isset($_FILES['files'])) {
         $files = $_FILES['files'];
@@ -20,17 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $file = $_FILES['file'];
     }
 
-    $title = "Новая заявка с сайта";
-    $body = "
-    <h2>Форма: $fname</h2><br>
-    <b>Имя:</b> $name<br>
-    <b>Телефон:</b> $phone<br>
-    <b>Email:</b> $email<br><br>
-    ";
-
-    if ($_POST['message'] != '') {
-        $body .= "<b>Сообщение:</b>$message<br>";
-    }
     // Настройки PHPMailer
     $mail = new PHPMailer\PHPMailer\PHPMailer();
     try {
