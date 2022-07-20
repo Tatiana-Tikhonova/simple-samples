@@ -41,7 +41,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 inp.setAttribute('class', 'option__input');
                 inp.setAttribute('type', opt.type);
                 inp.setAttribute('name', opt.name);
-                inp.setAttribute('id', opt.name + j);
+                inp.setAttribute('id', opt.type + i + j);
                 inp.setAttribute('value', opt.value);
                 if (opt.req) {
                     inp.setAttribute('aria-required', true);
@@ -49,7 +49,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 options.appendChild(inp);
                 let option = document.createElement('label');
                 option.setAttribute('class', 'quiz-step__option option option-' + opt.type);
-                option.setAttribute('for', opt.name + j);
+                option.setAttribute('for', opt.type + i + j);
                 if (opt.image) {
                     let img = document.createElement('img');
                     img.setAttribute('class', 'option__img');
@@ -103,6 +103,13 @@ window.addEventListener('DOMContentLoaded', function () {
     function printError(curr, msg) {
         let notice = curr.querySelector('.quiz__notice');
         notice.textContent = msg;
+        if ('' != msg) {
+            notice.style.display = 'block';
+        }
+        else {
+            notice.style.display = 'none';
+        }
+
     }
     function bindSteps() {
         next.addEventListener('click', function (e) {
@@ -148,7 +155,8 @@ window.addEventListener('DOMContentLoaded', function () {
                 });
                 if (0 == isCheck && 'agreement' != name) {
                     printError(curr, "Выберите варианты!");
-                } else {
+                }
+                else {
                     printError(curr, '');
                     navigateSteps(curr, target);
                     updateProgress(curr, 'next');
@@ -169,15 +177,18 @@ window.addEventListener('DOMContentLoaded', function () {
                         let val = r.getAttribute('value');
                         if (r.checked && 'other' == val) {
                             let from = curr.querySelector('[name=other]');
-                            if ('' == from.value) {
-                                printError(curr, "Напишите ваш вариант!");
+                            if (from) {
+                                if ('' == from.value) {
+                                    printError(curr, "Напишите ваш вариант!");
+                                }
+                                else {
+                                    printError(curr, '');
+                                    r.value = r.value + ': ' + from.value;
+                                    navigateSteps(curr, target);
+                                    updateProgress(curr, 'next');
+                                }
                             }
-                            else {
-                                printError(curr, '');
-                                r.value = r.value + ': ' + from.value;
-                                navigateSteps(curr, target);
-                                updateProgress(curr, 'next');
-                            }
+
                         }
                         else if (r.checked && 'other' != val) {
                             printError(curr, '');
@@ -214,6 +225,15 @@ window.addEventListener('DOMContentLoaded', function () {
             steps = document.querySelectorAll('[data-quiz-step]'),
             curr = steps[steps.length - 1];
 
+        if (!agreement.checked) {
+            printError(curr, 'Подтвердите согласие на обработку персональных данных!');
+            agreement.classList.add('invalid');
+        }
+        else {
+
+            agreement.classList.remove('invalid');
+            agreement.classList.add('validate');
+        }
 
         if (nameField.getAttribute('aria-required') && '' == nameField.value) {
             printError(curr, 'Пожалуйста, заполните все поля!');
@@ -242,15 +262,7 @@ window.addEventListener('DOMContentLoaded', function () {
             emailField.classList.remove('invalid');
             emailField.classList.add('validate');
         }
-        if (!agreement.checked) {
-            printError(curr, 'Подтвердите согласие на обработку персональных данных!');
-            agreement.classList.add('invalid');
-        }
-        else {
 
-            agreement.classList.remove('invalid');
-            agreement.classList.add('validate');
-        }
         if (nameField.classList.contains('validate') &&
             emailField.classList.contains('validate') &&
             agreement.classList.contains('validate')) {

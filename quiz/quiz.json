@@ -5,7 +5,6 @@
             "options": [
                 {
                     "type": "radio",
-                    "req": "false",
                     "name": "Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты?",
                     "value": "Lorem ipsum dolor sit amet consectetur.",
                     "text": "Lorem ipsum dolor sit amet consectetur.",
@@ -13,7 +12,6 @@
                 },
                 {
                     "type": "radio",
-                    "req": "false",
                     "name": "Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты?",
                     "value": "Lorem ipsum dolor sit amet.",
                     "text": "Lorem ipsum dolor sit amet consectetur.",
@@ -21,7 +19,6 @@
                 },
                 {
                     "type": "radio",
-                    "req": "false",
                     "name": "Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты?",
                     "value": "Lorem ipsum dolor consectetur.",
                     "text": "Lorem ipsum dolor sit amet consectetur.",
@@ -29,14 +26,12 @@
                 },
                 {
                     "type": "radio",
-                    "req": "false",
                     "name": "Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты?",
                     "value": "other",
                     "text": "Other variant (write it here)"
                 },
                 {
                     "type": "input",
-                    "req": "false",
                     "name": "other",
                     "placeholder": "Lorem ipsum dolor"
                 }
@@ -47,21 +42,18 @@
             "options": [
                 {
                     "type": "checkbox",
-                    "req": "false",
                     "name": "Далеко-далеко в стране гласных и согласных живут рыбные тексты?[]",
                     "value": "Lorem ipsum dolor sit amet consectetur.",
                     "text": "Lorem ipsum dolor sit amet consectetur."
                 },
                 {
                     "type": "checkbox",
-                    "req": "false",
                     "name": "Далеко-далеко в стране гласных и согласных живут рыбные тексты?[]",
                     "value": "Lorem ipsum dolor sit.",
                     "text": "Lorem ipsum dolor sit amet consectetur."
                 },
                 {
                     "type": "checkbox",
-                    "req": "false",
                     "name": "Далеко-далеко в стране гласных и согласных живут рыбные тексты?[]",
                     "value": "Lorem ipsum dolor.",
                     "text": "Lorem ipsum dolor sit amet consectetur."
@@ -103,7 +95,6 @@
                 },
                 {
                     "type": "submit",
-                    "req": "false",
                     "value": "Send"
                 }
             ]
