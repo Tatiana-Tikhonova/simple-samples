@@ -1,0 +1,29 @@
+*{
+    box-sizing: border-box;
+}
+.reviews {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.reviews__item {
+}
+.review {
+    display: flex;
+}
+.review__thumb {
+    width: 100px;
+    flex: 0 0 100px;
+}
+.review__img {
+    max-width: 100%;
+    vertical-align: top;
+}
+.review__body {
+    padding-left: 40px;
+}
+.review__title {
+}
+.review__text {
+}
+.review__text-par {
+}

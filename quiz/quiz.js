@@ -294,7 +294,7 @@ window.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             quiz.style.display = 'flex';
             // получаем данные методом fetch
-            // getDataFetch('data.json')
+            // getDataFetch('quiz.json')
             //     .then(function (res) { printQuiz(res); })
             //     .catch(function (error) { printError(error); });
 
