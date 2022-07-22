@@ -91,3 +91,17 @@ let isHover;
 window.matchMedia("(any-hover:hover)").matches ? isHover = true : isHover = false;
 // console.log('isHover ', isHover);
 // ====================================
+/**
+ * Направление скролла
+ */
+let lastScrollTop = 0;
+window.onscroll = onScroll;
+function onScroll(e) {
+    if (lastScrollTop > window.pageYOffset) {
+        console.log('up');
+    }
+    else {
+        console.log('down');
+    }
+    lastScrollTop = window.pageYOffset;
+}
