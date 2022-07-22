@@ -9,6 +9,7 @@
 }
 .review {
     display: flex;
+    margin-bottom: 50px;
 }
 .review__thumb {
     width: 100px;
@@ -24,6 +25,26 @@
 .review__title {
 }
 .review__text {
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: max-height 0.6s; /* для обрезки по абзацам */
+    /* обрезка по количеству строк */
+    line-height: 20px;/* для обрезки по строкам нужна line-height в px (если текст внутри блока не делится на абзацы) */
+    /* -webkit-line-clamp: 2; Число отображаемых строк */
+    display: -webkit-box; /* обязательно! */
+    -webkit-box-orient: vertical; /* обязательно! */
+    overflow: hidden; /* Обрезаем всё за пределами блока */
 }
 .review__text-par {
+    margin: 0 0 20px 0;
+     /* обрезка по количеству строк */
+    line-height: 20px;/* для обрезки по строкам нужна line-height в px  (если текст внутри блока делится на абзацы) */
+    /* -webkit-line-clamp: 2; Число отображаемых строк */
+    display: -webkit-box; /* обязательно! */
+    -webkit-box-orient: vertical; /* обязательно! */
+    overflow: hidden; /* Обрезаем всё за пределами блока */
+}
+.truncated{
+   
+    
 }

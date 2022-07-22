@@ -23,6 +23,7 @@ pointer-events: none;
 }
 .quiz__preloader.quiz__preloader_visible{
     display: flex;
+    flex-direction: column;
     justify-content:center;
     align-items: center;
 }
@@ -31,6 +32,21 @@ pointer-events: none;
 .quiz__preloader-icon {
     width: 100px;height: 100px;
     margin-bottom: 20px;
+    animation-name: spinner-spin;
+  animation-duration: 2s;
+  animation-iteration-count:infinite;
+  animation-timing-function: linear;
+}
+@keyframes spinner-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+.quiz__preloader-icon svg{
+    width: 100px;
+    height: 100px;
+}
+.quiz__preloader-icon path{
+    fill:black;
 }
 .quiz__preloader-text {
     font-family: Arial;
