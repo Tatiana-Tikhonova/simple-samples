@@ -14,13 +14,13 @@ a, button{
 }
 
 .header {
-    /*
-     position: fixed;
-    padding: 40px 0; это для shrinkHeader()*/
-    position: absolute;
+    
+    /*  position: fixed;
+    padding: 40px 0;  это для shrinkHeader()*/
+     position: absolute; /* это для floatHeader() и stickyOnScrollUp()*/
+     top: 0;
+     z-index: 99;
     width: 100%;
-    top: 0;
-    z-index: 99;
     background: grey;
     overflow: hidden;
     transition: 0.4s;
@@ -58,7 +58,7 @@ align-items: center;
 padding-top: 20px;padding-bottom: 20px;
 }
 .logo {
-    /* font-size: 44px;transition: 0.4s;  это для shrinkHeader()*/
+    /* font-size: 44px;transition: 0.4s;    это для shrinkHeader()*/
     font-size: 34px;
 }
 .menu {
@@ -71,7 +71,7 @@ align-items: center;
     margin-left: 10px;
 }
 .menu__link {
-    /* font-size: 32px;transition: 0.4s;  это для shrinkHeader()*/
+    /* font-size: 32px;transition: 0.4s;   это для shrinkHeader()*/
     font-size: 22px;
 }
 .menu__btn {

@@ -5,8 +5,16 @@ window.addEventListener('DOMContentLoaded', function () {
         sticky = navbar.offsetTop;
     document.body.style.marginTop = header.offsetHeight + 'px'; //это для shrinkHeader() и floatHeader()
 
+    function stickyNavbar() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky-nav");
+        } else {
+            navbar.classList.remove("sticky-nav");
+        }
+    }
+
     function shrinkHeader() {
-        if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        if (document.body.scrollTop > header.offsetHeight || document.documentElement.scrollTop > header.offsetHeight) {
             header.style.padding = "20px 10px";
             header.querySelector(".logo").style.fontSize = "32px";
             header.querySelectorAll(".menu__link").forEach(function (el, i) {
@@ -20,13 +28,7 @@ window.addEventListener('DOMContentLoaded', function () {
             });
         }
     }
-    function stickyNavbar() {
-        if (window.pageYOffset >= sticky) {
-            navbar.classList.add("sticky-nav")
-        } else {
-            navbar.classList.remove("sticky-nav");
-        }
-    }
+
     function floatHeader() {
 
         if (window.pageYOffset > header.offsetHeight && window.pageYOffset < window.innerHeight / 1.2) {
@@ -44,6 +46,7 @@ window.addEventListener('DOMContentLoaded', function () {
             header.style.position = 'absolute';
         }
     }
+
     let lastScrollTop = 0;
     function stickyOnScrollUp() {
         if (window.pageYOffset >= window.innerHeight / 1.2) {

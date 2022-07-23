@@ -40,3 +40,18 @@ $(window).on('scroll', function (e) {
         // console.log('in top');
     }
 });
+// ====================================
+/**
+ * Направление скролла
+ */
+
+let lastScrollTop = 0;
+$(window).on('scroll', function (e) {
+    if (lastScrollTop > $(window).scrollTop()) {
+        console.log('up');
+    }
+    else {
+        console.log('down');
+    }
+    lastScrollTop = $(window).scrollTop();
+});
