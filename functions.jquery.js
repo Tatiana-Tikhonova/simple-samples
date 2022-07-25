@@ -7,25 +7,31 @@ $(window).on('scroll', function (e) {
      * offset - расстояние от целевого элемента до верхнего края документа
      * vh - высота окна просмотра (viewport)
      */
-    let offset = $('.form__colorpicker').offset().top,
+    let offset = $('.nums-item').offset().top,
+        elHt = $('.nums-item').height(),
         vh = $(window).height();
+
     /**
      * элемент выше окна просмотра
      */
     if ($(window).scrollTop() > offset) {
-        // console.log('top');
+        console.log('top');
     }
     /**
      * элемент ниже окна просмотра
      */
     if ($(window).scrollTop() <= offset - vh) {
-        // console.log('down');
+        console.log('down');
     }
     /**
      * элемент в окне просмотра
      */
-    if ($(window).scrollTop() > offset && $(window).scrollTop() <= offset - vh) {
-        // console.log('in');
+    if ($(window).scrollTop() > offset - vh && $(window).scrollTop() <= offset + elHt) {
+        console.log('in');
+        console.log($(window).scrollTop());
+        console.log(offset);
+
+
     }
     /**
      * элемент в нижней половине окна

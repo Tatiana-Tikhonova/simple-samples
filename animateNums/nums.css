@@ -1,0 +1,129 @@
+*{
+    box-sizing: border-box;
+}
+.screen{
+    min-height: 200vh;
+    display: flex;justify-content:center;align-items: center;
+}
+.nums {
+    width: 100%;
+    padding: 20px 0px;
+    display: flex;flex-wrap: wrap;
+    justify-content:center;align-items: center;
+    overflow: hidden;
+}
+.nums__item {
+    width: 20%;
+    position: relative;
+    margin: 20px;
+    padding: 20px;
+    display: flex;justify-content:center;align-items: center;flex-direction: column;
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    top: 100%;
+}
+.nums-item {
+}
+.nums-item__scale {
+    position: relative;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.nums-item__outer{
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    padding: 20px;
+    box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15),
+    -6px -6px 10px -1px rgba(255,255,255,0.7);
+
+}
+.nums-item__inner{
+    width:140px;
+    height: 140px;
+    display: flex;justify-content:center;align-items: center;
+    border-radius: 50%;
+    box-shadow: inset 4px 4px 6px -1px rgba(0,0,0,0.2),
+    inset -4px -4px 6px -1px rgba(255,255,255,0.7),
+    -0.5px -0.5px 0px rgba(255,255,255,1),
+    0.5px 0.5px 0px rgba(0,0,0,0.15),
+    0px 12px 10px -10px rgba(0,0,0,0.05);
+}
+svg{
+    position: absolute;
+    top: 0;left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+  circle{
+    fill:none; /*цвет заливки круга */
+    stroke: url(#GradientColor); /* цвет контура окружности*/
+    stroke-width:20px; /* ширина контура окружности*/
+    stroke-dasharray: 500;/* длина контура окружности*/
+    cx: 50%; /* расстояние до центра круга от левого края родителя*/
+    cy:50%; /* расстояние до центра круга от лверхнего края родителя*/
+    r:40%; /* радиус*/
+  }
+
+.nums-item__num {
+    display: inline-block;
+    width: 30px;
+    height: 33px;
+    font-size: 30px;
+}
+.nums-item__perc {
+}
+.nums-item__text {
+    font-size: 24px;
+}
+.animated{
+
+}
+.fadeUp{
+
+}
+.nums-item:nth-child(1).fadeUp.animated{
+    animation: fadeUp 0.6s linear 0.2s forwards;
+}
+.nums-item:nth-child(2).fadeUp.animated{
+    animation: fadeUp 0.6s linear 0.4s forwards;
+}
+.nums-item:nth-child(3).fadeUp.animated{
+    animation: fadeUp 0.6s linear 0.6s forwards;
+}
+@keyframes fadeUp {
+    /* 0%{
+        opacity: 0;
+        top: 100%;
+    } */
+    100%{
+        opacity: 1;
+        top: 0;
+    }
+}
+@media (max-width:1200px){
+    .nums-item__outer{
+width: 120px;
+height: 120px;
+padding: 10px;
+    }
+    .nums-item__inner{
+        width: 100px;
+        height: 100px;
+
+    }
+    circle{
+        stroke-width:12px;
+    }
+}
+@media (max-width:768px){
+    .nums__item{
+        width: 33.3333%;
+    }
+}
+@media (max-width:480px){
+    .nums__item{
+        width: 90%;
+    }
+}

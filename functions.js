@@ -105,3 +105,22 @@ function onScroll(e) {
     }
     lastScrollTop = window.pageYOffset;
 }
+// ====================================
+/**
+ * активируем анимацию при скролле
+ */
+
+function addAnimationOnScroll() {
+    let elems = document.querySelectorAll('.animate'),
+        vh = window.innerHeight;
+    window.addEventListener('scroll', function (e) {
+        elems.forEach(function (el, i) {
+            let offset = el.getBoundingClientRect().top;
+            if (offset > 0 && offset <= vh) {
+                if (!el.classList.contains('animated')) {
+                    el.classList.add('animated');
+                }
+            }
+        });
+    });
+}

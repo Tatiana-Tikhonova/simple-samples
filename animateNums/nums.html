@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nums</title>
+    <link rel="stylesheet" href="nums.css">
+</head>
+
+<body>
+    <div class="screen"></div>
+    <div class="screen">
+        <div class="nums">
+            <div class="nums__item nums-item animate fadeUp">
+                <div class="nums-item__scale">
+                    <div class="nums-item__outer">
+                        <div class="nums-item__inner">
+                            <!-- 
+                                Для анимации цифр нужны атрибуты:
+                                data-number - селектор,
+                                data-number-start - начальное значение,
+                                data-number-end - конечное значение,
+                                data-number-time - продолжительность анимации (сек)
+                             -->
+                            <span id="html" class="nums-item__num" data-number data-number-start="0"
+                                data-number-end="85" data-number-time="1">0</span>
+                            <span class="nums-item__perc">%</span>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <defs>
+                            <linearGradient id="GradientColor">
+                                <stop offset="0%" stop-color="#e91e63" />
+                                <stop offset="100%" stop-color="#673ab7" />
+                            </linearGradient>
+                        </defs>
+                        <!-- 
+                                Для анимации шкалы нужны атрибуты:
+                                data-scale - селектор,
+                                data-scale-end - конечное значение (должно совпадать со значением data-number-end цифры),
+                                data-scale-offset - фиксированное значение офсета для старта,
+                                data-scale-time - продолжительность анимации (сек) - надо подбирать вручную чтобы анимация шкалы +- совпадала с анимацией цифры
+                             -->
+                        <circle data-scale data-scale-time="1.7" data-scale-offset="500" data-scale-end="85"
+                            stroke-linecap="round" stroke-dashoffset="500" />
+                    </svg>
+                </div>
+                <div class="nums-item__text">html</div>
+            </div>
+            <div class="nums__item nums-item animate fadeUp">
+                <div class="nums-item__scale">
+                    <div class="nums-item__outer">
+                        <div class="nums-item__inner">
+                            <span id="css" class="nums-item__num" data-number data-number-start="0" data-number-end="80"
+                                data-number-time="1">80</span>
+                            <span class="nums-item__perc">%</span>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <defs>
+                            <linearGradient id="GradientColor">
+                                <stop offset="0%" stop-color="#e91e63" />
+                                <stop offset="100%" stop-color="#673ab7" />
+                            </linearGradient>
+                        </defs>
+                        <circle data-scale data-scale-time="1.6" data-scale-offset="500" data-scale-end="80"
+                            stroke-linecap="round" stroke-dashoffset="500" />
+                    </svg>
+                </div>
+                <div class="nums-item__text">css</div>
+            </div>
+            <div class="nums__item nums-item animate fadeUp">
+                <div class="nums-item__scale">
+                    <div class="nums-item__outer">
+                        <div class="nums-item__inner">
+                            <span id="js" class="nums-item__num" data-number data-number-start="0" data-number-end="75"
+                                data-number-time="1">75</span>
+                            <span class="nums-item__perc">%</span>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                        <defs>
+                            <linearGradient id="GradientColor">
+                                <stop offset="0%" stop-color="#e91e63" />
+                                <stop offset="100%" stop-color="#673ab7" />
+                            </linearGradient>
+                        </defs>
+                        <circle data-scale data-scale-time="1.5" data-scale-offset="500" data-scale-end="75"
+                            stroke-linecap="round" stroke-dashoffset="500" />
+                    </svg>
+                </div>
+                <div class="nums-item__text">js</div>
+            </div>
+        </div>
+    </div>
+    <div class="screen"></div>
+    <div class="screen"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="nums.jquery.js"></script>
+    <!-- <script src="nums.js"></script> -->
+
+</body>
+
+</html>
