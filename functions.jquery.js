@@ -14,7 +14,7 @@ $(window).on('scroll', function (e) {
     /**
      * элемент выше окна просмотра
      */
-    if ($(window).scrollTop() > offset) {
+    if ($(window).scrollTop() > offset + elHt) {
         console.log('top');
     }
     /**
