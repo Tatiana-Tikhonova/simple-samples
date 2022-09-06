@@ -1,0 +1,31 @@
+{
+    "objects": [
+        {
+            "latitude": 43.48828593275171,
+            "longitude": 43.618522408073375,
+            "hintContent": "Хинт метки 1",
+            "balloonContentHeader": "<i>Балун метки 1</i>",
+            "balloonContentBody": "<img style=\"width:30px; height\"30px;\" src=\"img/01.png\" alt=\"\"> <span>Содержимое <em>балуна</em> метки</span>",
+            "balloonContentFooter": "<i>Подвал</i>",
+            "iconContent": "Щелкни по мне 1"
+        },
+        {
+            "latitude": 43.50191607453408,
+            "longitude": 43.641881500000004,
+            "hintContent": "Хинт метки 2",
+            "balloonContentHeader": "<i>Балун метки 2</i>",
+            "balloonContentBody": "<img style=\"width:30px; height\"30px;\" src=\"img/01.png\" alt=\"\"> <span>Содержимое <em>балуна</em> метки</span>",
+            "balloonContentFooter": "<i>Подвал</i>",
+            "iconContent": "Щелкни по мне 2"
+        },
+        {
+            "latitude": 43.476628219305915,
+            "longitude": 43.58112999073782,
+            "hintContent": "Хинт метки 3",
+            "balloonContentHeader": "<i>Балун метки 3</i>",
+            "balloonContentBody": "<img style=\"width:30px; height\"30px;\" src=\"img/01.png\" alt=\"\"> <span>Содержимое <em>балуна</em> метки</span>",
+            "balloonContentFooter": "<i>Подвал</i>",
+            "iconContent": "Щелкни по мне 3"
+        }
+    ]
+}

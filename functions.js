@@ -26,7 +26,7 @@ window.addEventListener('scroll', function (e) {
     /**
      * элемент в окне просмотра
      */
-    if (offset > 0 && offset <= vh) {
+    if (offset > -elemHeight && offset <= vh) {
         // console.log('in');
     }
     /**
