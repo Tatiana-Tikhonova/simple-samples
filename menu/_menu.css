@@ -21,6 +21,7 @@ ul {
     background: white;
 }
 .header__container {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -147,6 +148,7 @@ ul {
     .menu__item {
         margin-left: 0;
     }
+    /* бургер с обычной анимацией */
     .menu-button {
         display: block;
         padding: 10px 0px 10px 10px;
@@ -175,6 +177,57 @@ ul {
     }
     .menu-button.active span:last-child {
         transform: translate(0px, -6px) rotate(-45deg);
+    }
+    /* бургер с новой анимацией */
+    .menu-button {
+        position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 4;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    }
+    .menu-button span {
+        position: absolute;
+        right: 0;
+      display: block;
+      width: 100%;
+      height: 2px;
+      border-radius:2px;
+      background: #000;
+    }
+    
+    .menu-button span:first-child {
+        top: 0px;
+   transition: transform 0.3s, top 0.3s ease 0.3s;
+    }
+    .menu-button span:nth-child(2) {
+        top: 6px;
+        opacity:1;
+     transition: opacity 0.1s ease 0.3s;
+    }
+    .menu-button span:last-child {
+        top: 12px;
+ transition: transform 0.3s, top 0.3s ease 0.3s;
+    }
+    .menu-button.active span:first-child {
+        top: 6px;
+        height: 2.6px;
+        transform:rotate(45deg);
+        transition: top 0.3s, height 0.3s, transform 0.3s ease 0.3s;
+    }
+    .menu-button.active span:nth-child(2) {
+        opacity:0;
+        transition: opacity 0.3s;
+    }
+    .menu-button.active span:last-child {
+        top: 6px;
+        height: 2.6px;
+        transform:rotate(-45deg);
+        transition: top 0.3s, height 0.3s, transform 0.3s ease 0.3s;
     }
     .menu__submenu {
         position: static;
